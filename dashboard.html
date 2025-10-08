@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Talk2Trend | User Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -12,123 +12,962 @@
             --bg: #f0f4ff; --card-bg: #ffffff; --header-bg: linear-gradient(90deg, #1e3c72, #2a5298);
             --nav-bg: #274caa; --text: #333; --muted: #666; --price: #4CAF50;
             --btn-bg: #28a745; --btn-text: #fff; --shadow: rgba(0,0,0,0.15);
+            --accent: #4285F4; --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
         }
         .dark {
             --bg: #0f111a; --card-bg: #1f2436; --header-bg: linear-gradient(90deg, #0d1b44, #1f295f);
             --nav-bg: #1a274f; --text: #e6e8ff; --muted: #a0a8c0; --price: #7ed957;
             --btn-bg: #256a3d; --btn-text: #fff; --shadow: rgba(0,0,0,0.6);
+            --accent: #60a5fa; --success: #34d399; --warning: #fbbf24; --danger: #f87171;
         }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
             background-color: var(--bg); color: var(--text);
             transition: background-color .3s, color .3s; margin: 0;
-            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            font-family: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6; -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
-        .container { max-width: 1300px; margin: auto; padding: 3rem; }
         
-        .navbar {
-            background-color: #263238; color: white; padding: 1.4rem 3rem;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18);
+        .container { 
+            max-width: 1300px; margin: auto; 
+            padding: 2rem 1rem;
+            width: 100%;
         }
-        .navbar h1 { font-size: 2.1rem; font-weight: 700; margin: 0; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-
-        .navbar button { background-color: transparent; border: none; color: white; cursor: pointer; transition: transform 0.2s ease; }
-        .navbar button:hover { transform: scale(1.1); }
+        
+        /* Enhanced Navbar - Mobile First */
+        .navbar {
+            background-color: #263238; color: white; 
+            padding: 1rem;
+            display: flex; 
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18); 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .navbar h1 { 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            letter-spacing: -0.5px; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px;
+            flex: 1;
+        }
+        
+        .navbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .navbar button { 
+            background-color: rgba(255,255,255,0.1); 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            font-size: 1.2rem;
+            padding: 8px;
+            border-radius: 8px;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .navbar button:hover { 
+            transform: scale(1.05); 
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .navbar button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Search Bar - Mobile Optimized */
+        .search-container {
+            width: 100%;
+            order: 3;
+        }
+        
+        .search-box {
+            position: relative; 
+            width: 100%;
+        }
+        
+        .search-box input {
+            width: 100%; 
+            padding: 0.9rem 1rem 0.9rem 3rem; 
+            border-radius: 12px;
+            border: none; 
+            background: rgba(255,255,255,0.15); 
+            color: white;
+            font-size: 1rem; 
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input::placeholder { 
+            color: rgba(255,255,255,0.7); 
+        }
+        
+        .search-box input:focus {
+            outline: none; 
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+        }
+        
+        .search-icon {
+            position: absolute; 
+            left: 1rem; 
+            top: 50%; 
+            transform: translateY(-50%);
+            font-size: 1.2rem; 
+            opacity: 0.8;
+        }
         
         .logout-btn {
-            background-color: #ef5350; color: white; border: none; padding: 0.8rem 1.6rem;
-            border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem;
-            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #ef5350; 
+            color: white; 
+            border: none; 
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            font-size: 1rem;
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            min-height: 48px;
+            width: 100%;
+            order: 2;
         }
-        .logout-btn:hover { background-color: #d32f2f; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); }
         
+        .logout-btn:hover { 
+            background-color: #d32f2f; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
+        }
+        
+        .logout-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Welcome Card - Mobile Enhanced */
         .welcome-card {
-            background: linear-gradient(to right top, #6a82fb, #a77df5);
-            color: #ffffff; padding: 3.5rem; border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); margin-bottom: 3.5rem;
-            text-align: center; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff; 
+            padding: 2rem 1.5rem; 
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+            margin-bottom: 2rem;
+            text-align: center; 
+            position: relative; 
+            overflow: hidden;
         }
+        
         .welcome-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             background: radial-gradient(circle at top left, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
-            pointer-events: none; z-index: 1;
+            pointer-events: none; 
+            z-index: 1;
         }
-        .welcome-card h2 { font-size: 2.8rem; margin-bottom: 1.2rem; font-weight: 700; text-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
-        .welcome-card p { font-size: 1.2rem; opacity: 0.98; margin-bottom: 0.6rem; }
         
-        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 2.5rem; margin-bottom: 3.5rem; }
+        .welcome-card h2 { 
+            font-size: 1.8rem; 
+            margin-bottom: 1rem; 
+            font-weight: 700; 
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1); 
+            position: relative; 
+            z-index: 2;
+        }
+        
+        .welcome-card p { 
+            font-size: 1rem; 
+            opacity: 0.98; 
+            margin-bottom: 0.5rem; 
+            position: relative; 
+            z-index: 2;
+        }
+        
+        .welcome-card .last-login {
+            font-size: 0.9rem; 
+            opacity: 0.85; 
+            margin-top: 0.8rem;
+        }
+        
+        /* Quick Stats - Mobile First */
+        .stats-grid {
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem; 
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--card-bg); 
+            padding: 1.5rem 1rem; 
+            border-radius: 16px;
+            box-shadow: 0 4px 15px var(--shadow); 
+            text-align: center;
+            transition: all 0.3s ease; 
+            border-left: 4px solid var(--accent);
+            position: relative; 
+            overflow: hidden;
+            min-height: 120px;
+        }
+        
+        .stat-card::before {
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            right: 0;
+            width: 60px; 
+            height: 60px; 
+            background: var(--accent);
+            opacity: 0.08; 
+            border-radius: 50%; 
+            transform: translate(30%, -30%);
+        }
+        
+        .stat-card:active { 
+            transform: scale(0.98); 
+        }
+        
+        .stat-card .stat-icon {
+            font-size: 2rem; 
+            margin-bottom: 0.5rem; 
+            opacity: 0.9;
+        }
+        
+        .stat-card .stat-value {
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            color: var(--accent);
+            margin-bottom: 0.3rem; 
+            position: relative; 
+            z-index: 1;
+            word-break: break-word;
+        }
+        
+        .stat-card .stat-label {
+            font-size: 0.85rem; 
+            color: var(--muted); 
+            font-weight: 500;
+            position: relative; 
+            z-index: 1;
+        }
+        
+        .stat-card.loading .stat-value {
+            background: linear-gradient(90deg, var(--muted) 25%, var(--accent) 50%, var(--muted) 75%);
+            background-size: 200% 100%; 
+            animation: shimmer 1.5s ease-in-out infinite;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Quick Actions - Touch Friendly */
+        .quick-actions {
+            background: var(--card-bg); 
+            padding: 1.5rem; 
+            border-radius: 20px;
+            box-shadow: 0 6px 20px var(--shadow); 
+            margin-bottom: 2rem;
+        }
+        
+        .quick-actions h3 {
+            font-size: 1.3rem; 
+            margin-bottom: 1.2rem; 
+            color: var(--text);
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem;
+        }
+        
+        .actions-grid {
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, #5b73e8 100%);
+            color: white; 
+            padding: 1.5rem 1rem; 
+            border-radius: 15px;
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3); 
+            border: none;
+            text-decoration: none; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            gap: 0.6rem; 
+            font-weight: 600;
+            min-height: 100px;
+            position: relative;
+        }
+        
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .action-btn .action-icon { 
+            font-size: 2.2rem; 
+        }
+        
+        .action-btn .action-text { 
+            font-size: 0.95rem; 
+        }
+        
+        /* Main Grid Cards */
+        .grid-cards { 
+            display: grid; 
+            grid-template-columns: 1fr;
+            gap: 1.5rem; 
+            margin-bottom: 2rem; 
+        }
+        
         .card {
-            background: var(--card-bg); padding: 2.8rem; border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); text-align: center;
-            transition: all 0.3s ease; display: flex; flex-direction: column;
-            justify-content: space-between; align-items: center; min-height: 220px; border: 1px solid #e0e0e0;
+            background: var(--card-bg); 
+            padding: 2rem 1.5rem; 
+            border-radius: 20px;
+            box-shadow: 0 6px 20px var(--shadow); 
+            text-align: center;
+            transition: all 0.3s ease; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: space-between; 
+            align-items: center; 
+            min-height: 180px; 
+            border: 1px solid rgba(66, 133, 244, 0.1);
+            position: relative; 
+            overflow: hidden;
         }
-        .card:hover { transform: translateY(-12px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2); }
-        .card h3 { margin-bottom: 1rem; font-size: 1.7rem; color: #4285F4; font-weight: 600; letter-spacing: -0.2px; }
-        .card p { font-size: 1.15rem; color: #616161; margin-top: 0.6rem; flex-grow: 1; }
         
+        .card::after {
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0;
+            height: 4px; 
+            background: linear-gradient(90deg, var(--accent), #5b73e8);
+            transform: scaleX(0); 
+            transition: transform 0.3s ease;
+        }
+        
+        .card:active::after { 
+            transform: scaleX(1); 
+        }
+        
+        .card:active { 
+            transform: scale(0.98); 
+        }
+        
+        .card h3 { 
+            margin-bottom: 1rem; 
+            font-size: 1.5rem; 
+            color: var(--accent); 
+            font-weight: 600; 
+        }
+        
+        .card p { 
+            font-size: 1.05rem; 
+            color: var(--muted); 
+            margin-top: 0.6rem; 
+            flex-grow: 1; 
+        }
+        
+        /* Buttons - Touch Friendly */
         .btn, .btn-cart {
-            display: inline-block; padding: 15px 30px; text-decoration: none; font-weight: 600;
-            border-radius: 12px; transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); margin-top: 1.8rem;
-            font-size: 1.05rem; letter-spacing: 0.5px; border: none;
+            display: inline-block; 
+            padding: 14px 28px; 
+            text-decoration: none; 
+            font-weight: 600;
+            border-radius: 12px; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            margin-top: 1.5rem;
+            font-size: 1.05rem; 
+            letter-spacing: 0.5px; 
+            border: none; 
+            cursor: pointer;
+            min-height: 48px;
+            min-width: 120px;
         }
-        .btn { background-color: #4CAF50; color: white; }
-        .btn:hover { background-color: #388E3C; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); }
-        .btn-cart { background-color: #4285F4; color: white; }
-        .btn-cart:hover { background-color: #3367d6; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); }
         
-        #cartVoiceBtn.listening { background-color: #10b981; border-radius: 50%; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16,185,129, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(16,185,129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16,185,129, 0); } }
-
-        /* --- FINAL RESPONSIVE FIX --- */
-        @media (max-width: 768px) {
+        .btn { 
+            background-color: #4CAF50; 
+            color: white; 
+        }
+        
+        .btn:active { 
+            transform: scale(0.95); 
+        }
+        
+        .btn-cart { 
+            background-color: #4285F4; 
+            color: white; 
+        }
+        
+        .btn-cart:active { 
+            transform: scale(0.95); 
+        }
+        
+        /* Voice Control Animation */
+        #cartVoiceBtn.listening { 
+            background-color: #10b981 !important; 
+            animation: pulse 1s infinite; 
+        }
+        
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(16,185,129, 0.7); } 
+            70% { box-shadow: 0 0 0 10px rgba(16,185,129, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(16,185,129, 0); } 
+        }
+        
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute; 
+            top: -5px; 
+            right: -5px;
+            background: var(--danger); 
+            color: white; 
+            border-radius: 50%;
+            width: 22px; 
+            height: 22px; 
+            display: flex; 
+            align-items: center;
+            justify-content: center; 
+            font-size: 0.75rem; 
+            font-weight: 700;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+        
+        /* Recent Activity - Mobile */
+        .activity-section {
+            background: var(--card-bg); 
+            padding: 1.5rem; 
+            border-radius: 20px;
+            box-shadow: 0 6px 20px var(--shadow); 
+            margin-bottom: 2rem;
+        }
+        
+        .activity-section h3 {
+            font-size: 1.3rem; 
+            margin-bottom: 1.2rem; 
+            color: var(--text);
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem;
+        }
+        
+        .activity-item {
+            display: flex; 
+            align-items: center; 
+            gap: 0.8rem; 
+            padding: 1rem;
+            border-left: 3px solid var(--accent); 
+            background: var(--bg);
+            border-radius: 8px; 
+            margin-bottom: 0.8rem; 
+            transition: all 0.3s ease;
+        }
+        
+        .activity-item:active {
+            transform: translateX(5px); 
+            box-shadow: 0 3px 10px var(--shadow);
+        }
+        
+        .activity-icon {
+            font-size: 1.6rem; 
+            min-width: 35px; 
+            text-align: center;
+        }
+        
+        .activity-content {
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .activity-title {
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            margin-bottom: 0.2rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .activity-time {
+            font-size: 0.8rem; 
+            color: var(--muted);
+        }
+        
+        /* Keyboard Shortcuts - Hide on Mobile */
+        .shortcuts-hint {
+            display: none;
+        }
+        
+        /* ===== TABLET BREAKPOINT (601px - 768px) ===== */
+        @media (min-width: 601px) {
+            .container {
+                padding: 2.5rem 2rem;
+            }
+            
             .navbar {
-                flex-direction: row; /* Keep elements in a row */
-                flex-wrap: wrap; /* Allow wrapping if necessary */
-                justify-content: space-between;
-                padding: 1rem;
-                gap: 1rem;
+                flex-direction: row;
+                align-items: center;
+                padding: 1.2rem 2rem;
             }
+            
             .navbar h1 {
-                order: 1; /* Title first */
-                font-size: 1.2rem; /* Smaller font to make space */
-                white-space: nowrap; /* Prevent title text from wrapping */
-                gap: 8px; /* Reduce gap between title and buttons */
+                font-size: 1.6rem;
             }
-            .navbar h1 button {
-                width: 38px; height: 38px; padding: 6px; font-size: 1rem;
+            
+            .search-container {
+                max-width: 350px;
+                margin: 0 1.5rem;
+                order: 2;
             }
+            
             .logout-btn {
-                order: 2; /* Logout button last */
-                width: auto; /* Allow button to size to its content */
-                padding: 0.6rem 1rem;
+                width: auto;
+                min-width: 120px;
+                order: 3;
+            }
+            
+            .welcome-card {
+                padding: 2.5rem;
+            }
+            
+            .welcome-card h2 {
+                font-size: 2.2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .stat-card {
+                padding: 1.8rem 1.2rem;
+            }
+            
+            .actions-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .grid-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        /* ===== LARGE TABLET BREAKPOINT (769px - 1024px) ===== */
+        @media (min-width: 769px) {
+            .container {
+                padding: 3rem 2.5rem;
+            }
+            
+            .navbar {
+                padding: 1.4rem 2.5rem;
+            }
+            
+            .navbar h1 {
+                font-size: 1.9rem;
+            }
+            
+            .search-container {
+                max-width: 400px;
+                margin: 0 2rem;
+            }
+            
+            .welcome-card {
+                padding: 3rem;
+            }
+            
+            .welcome-card h2 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.8rem;
+            }
+            
+            .stat-card {
+                padding: 2rem 1.5rem;
+                min-height: 140px;
+            }
+            
+            .stat-card .stat-icon {
+                font-size: 2.5rem;
+            }
+            
+            .stat-card .stat-value {
+                font-size: 2rem;
+            }
+            
+            .quick-actions {
+                padding: 2rem;
+            }
+            
+            .quick-actions h3 {
+                font-size: 1.5rem;
+            }
+            
+            .activity-section {
+                padding: 2rem;
+            }
+            
+            .activity-section h3 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ===== DESKTOP BREAKPOINT (1025px+) ===== */
+        @media (min-width: 1025px) {
+            .container {
+                padding: 3rem;
+            }
+            
+            .navbar {
+                padding: 1.4rem 3rem;
+            }
+            
+            .navbar h1 {
+                font-size: 2.1rem;
+            }
+            
+            .welcome-card {
+                padding: 3.5rem;
+            }
+            
+            .welcome-card h2 {
+                font-size: 2.8rem;
+            }
+            
+            .welcome-card p {
+                font-size: 1.2rem;
+            }
+            
+            .stats-grid {
+                gap: 1.8rem;
+            }
+            
+            .stat-card {
+                padding: 2rem;
+                min-height: 160px;
+            }
+            
+            .stat-card:hover { 
+                transform: translateY(-8px); 
+                box-shadow: 0 12px 30px var(--shadow); 
+            }
+            
+            .stat-card .stat-value {
+                font-size: 2.2rem;
+            }
+            
+            .quick-actions {
+                padding: 2.5rem;
+            }
+            
+            .quick-actions h3 {
+                font-size: 1.6rem;
+            }
+            
+            .actions-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.2rem;
+            }
+            
+            .action-btn {
+                padding: 1.5rem 1rem;
+                min-height: 110px;
+            }
+            
+            .action-btn:hover {
+                transform: translateY(-5px); 
+                box-shadow: 0 8px 20px rgba(66, 133, 244, 0.4);
+            }
+            
+            .activity-section {
+                padding: 2.5rem;
+            }
+            
+            .activity-section h3 {
+                font-size: 1.6rem;
+            }
+            
+            .activity-item:hover {
+                transform: translateX(8px); 
+                box-shadow: 0 4px 12px var(--shadow);
+            }
+            
+            .grid-cards {
+                gap: 2.5rem;
+            }
+            
+            .card {
+                padding: 2.8rem;
+                min-height: 220px;
+            }
+            
+            .card:hover { 
+                transform: translateY(-12px); 
+                box-shadow: 0 18px 40px var(--shadow); 
+            }
+            
+            .card:hover::after { 
+                transform: scaleX(1); 
+            }
+            
+            .card h3 {
+                font-size: 1.7rem;
+            }
+            
+            .card p {
+                font-size: 1.15rem;
+            }
+            
+            .btn:hover { 
+                background-color: #388E3C; 
+                transform: translateY(-2px); 
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
+            }
+            
+            .btn-cart:hover { 
+                background-color: #3367d6; 
+                transform: translateY(-2px); 
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
+            }
+            
+            /* Show shortcuts on desktop */
+            .shortcuts-hint {
+                display: block;
+                position: fixed; 
+                bottom: 20px; 
+                right: 20px; 
+                background: var(--card-bg);
+                padding: 1rem 1.5rem; 
+                border-radius: 12px; 
+                box-shadow: 0 8px 25px var(--shadow);
+                font-size: 0.85rem; 
+                opacity: 0; 
+                pointer-events: none;
+                transition: opacity 0.3s ease; 
+                z-index: 1000;
+            }
+            
+            .shortcuts-hint.show { 
+                opacity: 1; 
+                pointer-events: all; 
+            }
+            
+            .shortcuts-hint kbd {
+                background: var(--bg); 
+                padding: 0.2rem 0.5rem; 
+                border-radius: 4px;
+                font-family: monospace; 
+                font-weight: 600; 
+                margin: 0 0.2rem;
+            }
+        }
+        
+        /* ===== EXTRA SMALL MOBILE (320px - 480px) ===== */
+        @media (max-width: 480px) {
+            .welcome-card h2 {
+                font-size: 1.5rem;
+            }
+            
+            .welcome-card p {
                 font-size: 0.9rem;
             }
-            .container { padding: 1.5rem; }
-            .welcome-card { padding: 2.5rem; }
-            .grid-cards { grid-template-columns: 1fr; }
+            
+            .stat-card {
+                padding: 1.2rem 0.8rem;
+                min-height: 110px;
+            }
+            
+            .stat-card .stat-icon {
+                font-size: 1.8rem;
+            }
+            
+            .stat-card .stat-value {
+                font-size: 1.4rem;
+            }
+            
+            .stat-card .stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .action-btn {
+                padding: 1.2rem 0.8rem;
+                min-height: 90px;
+            }
+            
+            .action-btn .action-icon {
+                font-size: 1.8rem;
+            }
+            
+            .action-btn .action-text {
+                font-size: 0.85rem;
+            }
+            
+            .activity-title {
+                font-size: 0.9rem;
+            }
+            
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .card p {
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Prevent horizontal scroll */
+        html, body {
+            overflow-x: hidden;
+            position: relative;
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <h1> Talk2Trend Dashboard
-            <button id="cartVoiceBtn" onclick="startCartVoice()" title="Voice Control">🎤</button>
-            <button id="stopVoiceBtn" onclick="stopCartVoice()" title="Voice Control">🔴</button>
-            <button id="darkModeToggle" aria-label="Toggle dark mode" style="padding:8px 12px; border-radius:6px; cursor:pointer; background:#fff; color:#1e3c72; font-weight:600;">🌙</button>
-        </h1>
+        <div class="navbar-top">
+            <h1>
+                Talk2Trend
+            </h1>
+            <div class="navbar-controls">
+                <button id="cartVoiceBtn" onclick="startCartVoice()" title="Voice Control" aria-label="Start voice control">🎤</button>
+                <button id="stopVoiceBtn" onclick="stopCartVoice()" title="Stop Voice" aria-label="Stop voice control">🔴</button>
+                <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search products, orders..." aria-label="Search dashboard">
+            </div>
+        </div>
+        
         <button class="logout-btn" onclick="logout()">Logout</button>
     </nav>
     
     <main class="container">
+        <!-- Enhanced Welcome Card -->
         <section class="welcome-card">
             <h2 id="welcomeMsg">Welcome, Fashion Enthusiast! 👋</h2>
             <p><strong>Email:</strong> <span id="userEmail">Loading...</span></p>
             <p>Manage your style journey with ease.</p>
+            <p class="last-login">Last login: <span id="lastLogin">Today</span></p>
         </section>
 
+        <!-- Quick Stats with Real Data -->
+        <section class="stats-grid">
+            <div class="stat-card loading">
+                <div class="stat-icon">📦</div>
+                <div class="stat-value" id="totalOrders">0</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card loading">
+                <div class="stat-icon">🛒</div>
+                <div class="stat-value" id="cartItems">0</div>
+                <div class="stat-label">Cart Items</div>
+            </div>
+            <div class="stat-card loading">
+                <div class="stat-icon">❤️</div>
+                <div class="stat-value" id="wishlistItems">0</div>
+                <div class="stat-label">Wishlist</div>
+            </div>
+            <div class="stat-card loading">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value" id="totalSpent">₹0</div>
+                <div class="stat-label">Cart Total</div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <h3>⚡ Quick Actions</h3>
+            <div class="actions-grid">
+                <button class="action-btn" onclick="window.location.href='product.html'" aria-label="Browse products">
+                    <span class="action-icon">👕</span>
+                    <span class="action-text">Browse</span>
+                </button>
+                <button class="action-btn" onclick="window.location.href='cart.html'" style="position: relative;" aria-label="View cart">
+                    <span class="action-icon">🛒</span>
+                    <span class="action-text">Cart</span>
+                    <span class="notification-badge" id="cartBadge" style="display:none;" aria-label="Cart items count">0</span>
+                </button>
+                <button class="action-btn" onclick="viewOrders()" aria-label="View orders">
+                    <span class="action-icon">📋</span>
+                    <span class="action-text">Orders</span>
+                </button>
+                <button class="action-btn" onclick="viewProfile()" aria-label="View profile">
+                    <span class="action-icon">👤</span>
+                    <span class="action-text">Profile</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Recent Activity with Real Data -->
+        <section class="activity-section">
+            <h3>📊 Recent Activity</h3>
+            <div id="activityList">
+                <div class="activity-item">
+                    <div class="activity-icon">🛍️</div>
+                    <div class="activity-content">
+                        <div class="activity-title">Loading activity...</div>
+                        <div class="activity-time">Please wait</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Original Main Cards -->
         <section class="grid-cards">
             <div class="card">
                 <h3>🛍️ Discover Products</h3>
@@ -143,7 +982,17 @@
         </section>
     </main>
 
+    <!-- Keyboard Shortcuts Helper -->
+    <div class="shortcuts-hint" id="shortcutsHint">
+        <div><kbd>?</kbd> Show shortcuts</div>
+        <div><kbd>P</kbd> Products</div>
+        <div><kbd>C</kbd> Cart</div>
+        <div><kbd>D</kbd> Dark mode</div>
+    </div>
+
+    <!-- Authentication & Basic Setup Script -->
     <script>
+        const BASE_URL = "https://talk2trend-5.onrender.com";
         const token = localStorage.getItem('token');
         const savedEmail = localStorage.getItem('email');
         const savedName = localStorage.getItem('name');
@@ -160,6 +1009,7 @@
         function goToCart() { window.location.href = "cart.html"; }
     </script>
 
+    <!-- Dark Mode Script -->
     <script>
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const stored = localStorage.getItem("theme");
@@ -168,19 +1018,269 @@
         function applyTheme(theme) {
             document.documentElement.classList.toggle("dark", theme === "dark");
             toggleBtn.textContent = theme === "dark" ? "☀️" : "🌙";
-            toggleBtn.style.background = theme === "dark" ? "#2c2f44" : "#fff";
-            toggleBtn.style.color = theme === "dark" ? "#f0f4ff" : "#1e3c72";
+            toggleBtn.style.background = theme === "dark" ? "rgba(44, 47, 68, 0.5)" : "rgba(255,255,255,0.1)";
         }
         applyTheme(stored || (prefersDark ? "dark" : "light"));
         toggleBtn.addEventListener("click", () => {
             const newTheme = document.documentElement.classList.contains("dark") ? "light" : "dark";
             applyTheme(newTheme);
-localStorage.setItem("theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+        });
+    </script>
+
+    <!-- MAIN SCRIPT: Real Data Integration -->
+    <script>
+        // ==================== FETCH REAL CART DATA ====================
+        async function fetchCartData() {
+            try {
+                const response = await fetch(`${BASE_URL}/api/cart`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        localStorage.clear();
+                        window.location.href = "login.html";
+                    }
+                    throw new Error('Failed to fetch cart');
+                }
+
+                const cartData = await response.json();
+                return cartData.items || [];
+            } catch (error) {
+                console.error('Error fetching cart:', error);
+                return [];
+            }
+        }
+
+        // ==================== FETCH ORDERS DATA ====================
+        async function fetchOrdersData() {
+            try {
+                const response = await fetch(`${BASE_URL}/api/orders`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch orders');
+                }
+
+                const orders = await response.json();
+                return orders || [];
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                return [];
+            }
+        }
+
+        // ==================== UPDATE DASHBOARD STATS ====================
+        async function updateDashboardStats() {
+            // Remove loading state
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.classList.remove('loading');
+            });
+
+            // Fetch real cart data
+            const cartItems = await fetchCartData();
+            
+            // Calculate real statistics from cart
+            let totalItems = 0;
+            let cartTotal = 0;
+            
+            cartItems.forEach(item => {
+                const quantity = parseInt(item.quantity || 0);
+                const price = parseFloat(item.productId?.price || 0);
+                totalItems += quantity;
+                cartTotal += price * quantity;
+            });
+
+            // Fetch orders data
+            const orders = await fetchOrdersData();
+            const totalOrders = orders.length;
+
+            // Update stat cards with real data
+            document.getElementById('totalOrders').textContent = totalOrders;
+            document.getElementById('cartItems').textContent = totalItems;
+            document.getElementById('totalSpent').textContent = '₹' + cartTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            
+            // Wishlist
+            const wishlistCount = parseInt(localStorage.getItem('wishlistCount') || '0');
+            document.getElementById('wishlistItems').textContent = wishlistCount;
+
+            // Update cart badge
+            if (totalItems > 0) {
+                document.getElementById('cartBadge').style.display = 'flex';
+                document.getElementById('cartBadge').textContent = totalItems;
+            } else {
+                document.getElementById('cartBadge').style.display = 'none';
+            }
+
+            // Store in localStorage
+            localStorage.setItem('cartCount', totalItems);
+            localStorage.setItem('totalOrders', totalOrders);
+            localStorage.setItem('cartTotal', cartTotal);
+
+            // Update activity feed
+            updateActivityFeed(cartItems, orders);
+        }
+
+        // ==================== UPDATE ACTIVITY FEED ====================
+        function updateActivityFeed(cartItems, orders) {
+            const activityList = document.getElementById('activityList');
+            const activities = [];
+
+            // Add cart items
+            cartItems.slice(0, 3).forEach(item => {
+                activities.push({
+                    icon: '🛒',
+                    title: `Added ${item.productId?.name || 'Product'} to cart`,
+                    time: 'Recently',
+                    timestamp: new Date()
+                });
+            });
+
+            // Add recent orders
+            orders.slice(0, 2).forEach(order => {
+                const orderDate = new Date(order.createdAt || Date.now());
+                const timeAgo = getTimeAgo(orderDate);
+                activities.push({
+                    icon: '📦',
+                    title: `Order placed - ₹${order.totalAmount?.toLocaleString('en-IN')}`,
+                    time: timeAgo,
+                    timestamp: orderDate
+                });
+            });
+
+            // Sort by timestamp
+            activities.sort((a, b) => b.timestamp - a.timestamp);
+
+            // Display activities
+            if (activities.length === 0) {
+                activityList.innerHTML = `
+                    <div class="activity-item">
+                        <div class="activity-icon">🛍️</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Welcome to Talk2Trend!</div>
+                            <div class="activity-time">Start exploring our collection</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            activityList.innerHTML = activities.slice(0, 5).map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon">${activity.icon}</div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.title}</div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==================== HELPER: TIME AGO ====================
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
+            if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+            return date.toLocaleDateString();
+        }
+
+        // ==================== SEARCH FUNCTIONALITY ====================
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            if (query.length > 2) {
+                console.log('Searching for:', query);
+            }
+        });
+        
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.length > 2) {
+                window.location.href = `product.html?search=${encodeURIComponent(this.value)}`;
+            }
+        });
+
+        // ==================== KEYBOARD SHORTCUTS ====================
+        let shortcutTimeout;
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '?' && !e.target.matches('input, textarea')) {
+                const hint = document.getElementById('shortcutsHint');
+                hint.classList.add('show');
+                clearTimeout(shortcutTimeout);
+                shortcutTimeout = setTimeout(() => hint.classList.remove('show'), 3000);
+            }
+            
+            if (!e.target.matches('input, textarea')) {
+                if (e.key === 'p' || e.key === 'P') {
+                    window.location.href = 'product.html';
+                } else if (e.key === 'c' || e.key === 'C') {
+                    window.location.href = 'cart.html';
+                } else if (e.key === 'd' || e.key === 'D') {
+                    toggleBtn.click();
+                }
+            }
+        });
+
+        // ==================== QUICK ACTION FUNCTIONS ====================
+        function viewOrders() {
+            window.location.href = 'orders.html';
+        }
+
+        function viewProfile() {
+            alert('Profile page coming soon! Manage your account settings here.');
+        }
+
+        // ==================== LAST LOGIN TIME ====================
+        const now = new Date();
+        const lastLoginTime = localStorage.getItem('lastLoginTime');
+        if (lastLoginTime) {
+            const lastDate = new Date(lastLoginTime);
+            const diff = Math.floor((now - lastDate) / 1000 / 60);
+            if (diff < 60) {
+                document.getElementById('lastLogin').textContent = `${diff} minutes ago`;
+            } else if (diff < 1440) {
+                document.getElementById('lastLogin').textContent = `${Math.floor(diff/60)} hours ago`;
+            } else {
+                document.getElementById('lastLogin').textContent = lastDate.toLocaleDateString();
+            }
+        }
+        localStorage.setItem('lastLoginTime', now.toISOString());
+
+        // ==================== INITIALIZE ON LOAD ====================
+        window.addEventListener('load', function() {
+            updateDashboardStats();
+        });
+
+        // ==================== AUTO-REFRESH STATS ====================
+        setInterval(updateDashboardStats, 30000);
+
+        // ==================== LISTEN TO STORAGE CHANGES ====================
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'cartCount' || e.key === 'totalOrders') {
+                updateDashboardStats();
+            }
         });
     </script>
     
+    <!-- Voice Control Script -->
     <script src="voice.js"></script>
 
+    <!-- PWA Service Worker -->
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("service-worker.js")

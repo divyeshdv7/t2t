@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Definitive Real-View Virtual Try-On</title>
+    <style>
+        body, html {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: #f0f2f5;
+            margin: 0;
+        }
+        #container {
+            position: relative;
+            width: 640px;
+            height: 480px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: #111;
+        }
+        #webcam, #output_canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: scaleX(-1);
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            background: rgba(0,0,0,0.75);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 100;
+            text-align: center;
+        }
+    </style>
+    <!-- Use the LATEST stable MediaPipe Tasks Vision Bundle -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.9/vision_bundle.js"></script>
+    <!-- Three.js via importmap -->
+    <script async src="https://unpkg.com/es-module-shims@1.7.1/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.151.3/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+<body>
+    <h1>Definitive Real-View Virtual Try-On</h1>
+    <div id="container">
+        <video id="webcam" autoplay playsinline style="visibility: hidden;"></video>
+        <canvas id="output_canvas" width="640px" height="480px"></canvas>
+        <div id="loading">Initializing AI, please wait...</div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        const { PoseLandmarker, FilesetResolver } = window.ai;
+
+        const video = document.getElementById("webcam");
+        const canvasElement = document.getElementById("output_canvas");
+        const canvasCtx = canvasElement.getContext("2d");
+        const loadingElement = document.getElementById("loading");
+
+        let poseLandmarker;
+        let scene, camera, renderer, tshirtMesh;
+        let lastVideoTime = -1;
+
+        async function initializeApp() {
+            try {
+                const vision = await FilesetResolver.forVisionTasks(
+                    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.9/wasm"
+                );
+                poseLandmarker = await PoseLandmarker.createFromOptions(vision, {
+                    baseOptions: {
+                        modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task`,
+                        delegate: "GPU"
+                    },
+                    runningMode: "VIDEO",
+                    numPoses: 1
+                });
+                console.log("Pose Landmarker created successfully.");
+                loadingElement.style.display = "none";
+                await startWebcam();
+            } catch (error) {
+                console.error("Initialization Error:", error);
+                loadingElement.innerText = "Error: Could not load AI model. Check browser console for details.";
+            }
+        }
+
+        async function startWebcam() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+                initThreeJS();
+                predictWebcam();
+            };
+        }
+        
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(50, 640 / 480, 0.1, 1000);
+            camera.position.z = 5;
+            renderer = new THREE.WebGLRenderer({ canvas: canvasElement, alpha: true, antialias: true });
+            renderer.setSize(640, 480);
+            renderer.setClearColor(0x000000, 0);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+            scene.add(ambientLight);
+            
+            const texture = new THREE.TextureLoader().load('https://i.imgur.com/pDHkUyC.png');
+            const material = new THREE.MeshLambertMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
+            const geometry = new THREE.PlaneGeometry(3.5, 3.8);
+            tshirtMesh = new THREE.Mesh(geometry, material);
+            scene.add(tshirtMesh);
+        }
+
+        function predictWebcam() {
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            canvasCtx.drawImage(video, 0, 0, 640, 480);
+
+            if (video.readyState >= 2 && lastVideoTime !== video.currentTime) {
+                lastVideoTime = video.currentTime;
+                const poseLandmarkerResult = poseLandmarker.detectForVideo(video, performance.now());
+
+                if (poseLandmarkerResult.landmarks.length > 0) {
+                    const lm = poseLandmarkerResult.landmarks[0];
+                    const leftShoulder = lm[11];
+                    const rightShoulder = lm[12];
+                    const leftHip = lm[23];
+
+                    const centerX = (leftShoulder.x + rightShoulder.x) / 2;
+                    const centerY = (leftShoulder.y + leftHip.y) / 2;
+                    
+                    tshirtMesh.position.x = (centerX - 0.5) * -7;
+                    tshirtMesh.position.y = (centerY - 0.5) * -7;
+                    
+                    const angle = Math.atan2(rightShoulder.y - leftShoulder.y, rightShoulder.x - leftShoulder.x);
+                    tshirtMesh.rotation.z = angle;
+                    
+                    const dist = Math.sqrt(Math.pow(rightShoulder.x - leftShoulder.x, 2) + Math.pow(rightShoulder.y - leftShoulder.y, 2));
+                    const scale = dist * 4;
+                    tshirtMesh.scale.set(scale, scale, scale);
+                }
+            }
+            
+            renderer.render(scene, camera);
+            window.requestAnimationFrame(predictWebcam);
+        }
+
+        initializeApp();
+    </script>
+</body>
+</html>
