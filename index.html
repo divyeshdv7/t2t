@@ -22,6 +22,7 @@
             --secondary-orange: #FF9800;
             --secondary-purple: #9C27B0;
             --accent-yellow: #FFC107;
+            --accent-red: #F44336;
             
             /* Neutral Colors */
             --white: #FFFFFF;
@@ -37,15 +38,15 @@
             --gray-800: #424242;
             --gray-900: #212121;
             
-            /* Background */
+            /* Background - Light Mode */
             --bg-primary: #FFFFFF;
             --bg-secondary: #F8FBFF;
             --bg-tertiary: #E3F2FD;
             
-            /* Text Colors */
-            --text-primary: #212121;
-            --text-secondary: #666666;
-            --text-tertiary: #999999;
+            /* Text Colors - Light Mode (High Contrast) */
+            --text-primary: #000000;
+            --text-secondary: #424242;
+            --text-tertiary: #616161;
             
             /* Shadows - Enhanced for depth */
             --shadow-sm: 0 2px 4px rgba(33, 150, 243, 0.08);
@@ -62,14 +63,27 @@
         .dark {
             --primary: #64B5F6;
             --primary-light: #90CAF9;
-            --bg-primary: #121212;
-            --bg-secondary: #1E1E1E;
-            --bg-tertiary: #1A2332;
+            
+            /* Background - Dark Mode */
+            --bg-primary: #0A0E27;
+            --bg-secondary: #141B3D;
+            --bg-tertiary: #1E2749;
+            
+            /* Text Colors - Dark Mode (High Contrast) */
             --text-primary: #FFFFFF;
-            --text-secondary: #B0B0B0;
-            --text-tertiary: #808080;
-            --gray-100: #1E1E1E;
-            --gray-200: #2A2A2A;
+            --text-secondary: #E0E0E0;
+            --text-tertiary: #BDBDBD;
+            
+            /* Neutral Adjustments for Dark Mode */
+            --gray-100: #1E2749;
+            --gray-200: #2A3458;
+            --gray-300: #3A4568;
+            
+            /* Shadow adjustments for dark mode */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.6);
         }
         
         * { 
@@ -113,9 +127,18 @@
             transition: all var(--transition-normal);
         }
 
+        .dark .main-header {
+            background: rgba(10, 14, 39, 0.9);
+            border-bottom-color: var(--gray-300);
+        }
+
         .main-header.scrolled {
             box-shadow: var(--shadow-md);
             background: rgba(255, 255, 255, 0.95);
+        }
+
+        .dark .main-header.scrolled {
+            background: rgba(10, 14, 39, 0.95);
         }
 
         .main-header__logo {
@@ -197,6 +220,10 @@
             background: var(--primary-lighter);
         }
 
+        .dark .header-actions button:hover {
+            background: var(--gray-200);
+        }
+
         .header-actions button:active {
             transform: translateY(0) scale(0.95);
         }
@@ -261,7 +288,7 @@
             left: 0;
             width: 280px;
             height: 100vh;
-            background: var(--white);
+            background: var(--bg-primary);
             display: flex;
             flex-direction: column;
             padding: 80px 0 20px 0;
@@ -302,6 +329,10 @@
             z-index: -1;
         }
 
+        .dark .main-nav a::before {
+            background: linear-gradient(90deg, var(--gray-200) 0%, transparent 100%);
+        }
+
         .main-nav a:hover::before {
             width: 100%;
         }
@@ -335,9 +366,9 @@
             visibility: visible;
         }
 
-        /* Interactive Hero Section */
+        /* Enhanced Promotional Hero Section */
         .hero-section {
-            padding: 40px 16px;
+            padding: 32px 16px;
             background: linear-gradient(135deg, #2196F3 0%, #00BCD4 100%);
             color: white;
             position: relative;
@@ -380,20 +411,76 @@
             z-index: 10; 
         }
 
-        .hero-section__title { 
-            font-size: 2rem;
+        /* Offer Badge */
+        .offer-badge {
+            display: inline-block;
+            background: var(--accent-red);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
             margin-bottom: 12px;
+            animation: slideInUp 0.5s ease;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+        }
+
+        .hero-section__title { 
+            font-size: 1.8rem;
+            margin-bottom: 8px;
             font-weight: 800;
             line-height: 1.2;
             animation: slideInUp 0.6s ease;
+            color: #FFFFFF;
+        }
+
+        .hero-section__discount {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            animation: slideInUp 0.7s ease;
+            color: #FFFFFF;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .hero-section__subtitle { 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             opacity: 0.95;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-weight: 400;
             animation: slideInUp 0.8s ease;
+            color: #FFFFFF;
+        }
+
+        .hero-section__timer {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: slideInUp 0.9s ease;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .timer-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: block;
+            color: #FFFFFF;
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            color: #FFFFFF;
         }
 
         @keyframes slideInUp {
@@ -450,6 +537,26 @@
             z-index: 1;
         }
 
+        /* Quick Offers Bar */
+        .offers-bar {
+            background: var(--accent-yellow);
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .offers-bar span {
+            margin: 0 8px;
+        }
+
         /* Interactive Feature Cards */
         .features-section {
             padding: 24px 16px;
@@ -466,7 +573,7 @@
             padding: 24px 18px;
             text-align: center;
             border-radius: 16px;
-            background: var(--white);
+            background: var(--bg-secondary);
             border: 2px solid var(--gray-200);
             transition: all var(--transition-fast);
             cursor: pointer;
@@ -559,7 +666,7 @@
         }
         
         .product-card {
-            background: var(--white);
+            background: var(--bg-primary);
             border-radius: 12px;
             overflow: hidden;
             transition: all var(--transition-fast);
@@ -600,7 +707,7 @@
             position: absolute;
             top: 10px;
             left: 10px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--accent-red) 0%, var(--secondary-orange) 100%);
             color: white;
             padding: 6px 12px;
             border-radius: 20px;
@@ -641,7 +748,14 @@
             font-size: 1.1rem; 
             font-weight: 700; 
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 4px;
+        }
+
+        .product-card__original-price {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+            margin-bottom: 8px;
         }
 
         .product-card__add-to-cart { 
@@ -721,7 +835,7 @@
 
         .stat-card {
             padding: 24px;
-            background: var(--white);
+            background: var(--bg-primary);
             border-radius: 16px;
             text-align: center;
             border: 2px solid var(--gray-200);
@@ -792,7 +906,7 @@
             border-radius: 8px;
             font-size: 0.9rem;
             font-family: 'Inter', sans-serif;
-            background: var(--white);
+            background: var(--bg-secondary);
             color: var(--text-primary);
             transition: all var(--transition-fast);
         }
@@ -848,7 +962,7 @@
 
         /* Footer */
         .main-footer { 
-            background: linear-gradient(135deg, var(--gray-900) 0%, #1A1A2E 100%);
+            background: linear-gradient(135deg, #000000 0%, #1A1A2E 100%);
             color: white;
             padding: 40px 16px 24px;
             position: relative;
@@ -879,6 +993,11 @@
             color: var(--primary-light);
         }
 
+        .footer-section p {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.9rem;
+        }
+
         .footer-links { 
             list-style: none;
             display: flex;
@@ -887,7 +1006,7 @@
         }
 
         .footer-links a { 
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.85);
             text-decoration: none; 
             transition: all var(--transition-fast);
             font-weight: 500;
@@ -896,7 +1015,7 @@
         }
 
         .footer-links a:hover { 
-            color: var(--primary-light);
+            color: #FFFFFF;
             transform: translateX(5px);
         }
 
@@ -924,10 +1043,10 @@
         }
 
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255,255,255,0.15);
             padding-top: 20px;
             text-align: center;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.6);
             font-size: 0.85rem;
         }
 
@@ -997,7 +1116,7 @@
             max-width: 800px;
             margin: 24px 16px;
             padding: 28px 22px;
-            background: var(--white);
+            background: var(--bg-secondary);
             border-radius: 16px;
             border: 2px solid var(--gray-200);
             box-shadow: var(--shadow-md);
@@ -1085,10 +1204,19 @@
 
         .contact-info h3 {
             margin-top: 0;
+            color: var(--text-primary);
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+        }
+
+        .contact-info strong {
+            color: var(--text-primary);
         }
 
         .faq-item {
-            background: var(--bg-secondary);
+            background: var(--bg-tertiary);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 14px;
@@ -1100,12 +1228,16 @@
         .faq-item:hover {
             transform: translateX(5px);
             box-shadow: var(--shadow-md);
-            background: var(--bg-tertiary);
         }
 
         .faq-item h3 {
             margin-top: 0;
             font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .faq-item p {
+            color: var(--text-secondary);
         }
 
         /* Desktop Enhancements */
@@ -1122,7 +1254,7 @@
                 position: static;
                 width: 100%;
                 height: auto;
-                background: var(--white);
+                background: var(--bg-primary);
                 flex-direction: row;
                 justify-content: center;
                 padding: 14px 0;
@@ -1148,7 +1280,11 @@
 
             .hero-section {
                 border-radius: 0;
-                padding: 60px 24px;
+                padding: 50px 24px;
+            }
+
+            .hero-section__discount {
+                font-size: 3.5rem;
             }
 
             .products-grid {
@@ -1199,6 +1335,11 @@
 <body>
     <div class="nav-overlay" id="navOverlay"></div>
 
+    <!-- Quick Offers Bar -->
+    <div class="offers-bar">
+        🎉 <span>FREE Shipping on orders ₹999+</span> | <span>Extra 10% on Prepaid Orders</span> 🎉
+    </div>
+
     <header class="main-header" id="header">
         <div class="hamburger-menu" id="hamburgerMenu">
             <div class="bar"></div>
@@ -1227,10 +1368,28 @@
         <div id="homePage">
             <section class="hero-section">
                 <div class="hero-content">
-                    <h1 class="hero-section__title">Style Redefined</h1>
-                    <p class="hero-section__subtitle">Discover curated collections that speak your style</p>
+                    <div class="offer-badge">🔥 MEGA SALE</div>
+                    <h1 class="hero-section__title">Fashion Fest 2025</h1>
+                    <div class="hero-section__discount">UPTO 70% OFF</div>
+                    <p class="hero-section__subtitle">On 1000+ Trending Products | Limited Time Offer</p>
+                    
+                    <div class="hero-section__timer" id="countdown">
+                        <div class="timer-box">
+                            <span class="timer-number" id="hours">00</span>
+                            <span class="timer-label">Hours</span>
+                        </div>
+                        <div class="timer-box">
+                            <span class="timer-number" id="minutes">00</span>
+                            <span class="timer-label">Mins</span>
+                        </div>
+                        <div class="timer-box">
+                            <span class="timer-number" id="seconds">00</span>
+                            <span class="timer-label">Secs</span>
+                        </div>
+                    </div>
+
                     <button class="hero-section__cta-button" onclick="window.location.href='product.html'">
-                        <span>Explore Now</span>
+                        <span>Shop Now →</span>
                     </button>
                 </div>
             </section>
@@ -1261,8 +1420,8 @@
             </section>
 
             <section class="products-section">
-                <h2 class="products-section-title">Featured Arrivals</h2>
-                <p class="products-section-subtitle">Trending styles curated for you</p>
+                <h2 class="products-section-title">🔥 Hot Deals Today</h2>
+                <p class="products-section-subtitle">Limited stock • Flat 50-70% OFF</p>
                 <div class="products-grid" id="productsGrid">
                     <div class="loader"></div>
                 </div>
@@ -1272,7 +1431,7 @@
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-number" data-target="50000">0</div>
-                        <div class="stat-label">Customers</div>
+                        <div class="stat-label">Happy Customers</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number" data-target="1000">0</div>
@@ -1290,8 +1449,8 @@
             </section>
 
             <section class="newsletter-section">
-                <h2 class="newsletter-title">Stay Updated</h2>
-                <p class="newsletter-subtitle">Get exclusive deals & style tips</p>
+                <h2 class="newsletter-title">💌 Get Exclusive Deals</h2>
+                <p class="newsletter-subtitle">Subscribe for early access to sales & special offers</p>
                 <form class="newsletter-form" onsubmit="return handleNewsletter(event)">
                     <input type="email" class="newsletter-input" placeholder="Your email" required>
                     <button type="submit" class="newsletter-button">Subscribe</button>
@@ -1373,7 +1532,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Talk2Trend</h3>
-                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Fashion that speaks volumes</p>
+                <p>Fashion that speaks volumes</p>
             </div>
             <div class="footer-section">
                 <h3>Links</h3>
@@ -1411,6 +1570,33 @@
     <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll up">↑</button>
 
     <script>
+        // Countdown Timer Function
+        function startCountdown() {
+            const endTime = new Date();
+            endTime.setHours(23, 59, 59, 999); // End of day
+            
+            function updateTimer() {
+                const now = new Date();
+                const diff = endTime - now;
+                
+                if (diff <= 0) {
+                    endTime.setDate(endTime.getDate() + 1);
+                    return;
+                }
+                
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('#mainContent > div').forEach(p => p.style.display = 'none');
             document.getElementById(pageId).style.display = 'block';
@@ -1477,7 +1663,7 @@
         function handleNewsletter(e) {
             e.preventDefault();
             const email = e.target.querySelector('input').value;
-            alert(`Thanks! Updates will be sent to ${email}`);
+            alert(`🎉 Success! Exclusive deals will be sent to ${email}`);
             e.target.reset();
             return false;
         }
@@ -1548,16 +1734,22 @@
                     grid.innerHTML = '<p class="info-message">No products available</p>';
                     return;
                 }
+                
+                // Discount percentages for featured products
+                const discounts = ['50%', '70%', '60%', '55%'];
+                
                 products.forEach((p, i) => {
                     const card = document.createElement('div');
                     card.className = 'product-card';
+                    const originalPrice = Math.floor(p.price * 1.8);
                     card.innerHTML = `
                         <div class="product-card__image-wrapper">
                             <img src="${p.image}" alt="${p.name}" class="product-card__image" loading="lazy"/>
-                            ${i === 0 ? '<span class="product-badge">HOT</span>' : i === 1 ? '<span class="product-badge">NEW</span>' : ''}
+                            <span class="product-badge">${discounts[i] || '50%'} OFF</span>
                         </div>
                         <div class="product-card__info">
                             <h3 class="product-card__title">${p.name}</h3>
+                            <p class="product-card__original-price">₹${originalPrice.toLocaleString('en-IN')}</p>
                             <p class="product-card__price">₹${p.price.toLocaleString('en-IN')}</p>
                             <button class="product-card__add-to-cart" onclick="addToCart('${p.id}', '${p.name}', ${p.price}, '${p.image}')">
                                 Add to Cart
@@ -1605,7 +1797,10 @@
             document.getElementById('cartVoiceBtn').classList.remove('listening');
         }
 
-        document.addEventListener("DOMContentLoaded", fetchAndDisplayProducts);
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchAndDisplayProducts();
+            startCountdown();
+        });
     </script>
     
     <script src="voice.js"></script>
