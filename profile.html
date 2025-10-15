@@ -2,77 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Talk2Trend | Profile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>Talk2Trend | My Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2196F3">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* Matching Light Blue Theme */
+        /* Matching Design System from Dashboard */
         :root {
             --primary: #2196F3;
             --primary-dark: #1976D2;
             --primary-light: #64B5F6;
             --primary-lighter: #BBDEFB;
-            --primary-hover: #1E88E5;
             
             --secondary-cyan: #00BCD4;
             --secondary-green: #4CAF50;
             --secondary-orange: #FF9800;
-            --secondary-purple: #9C27B0;
             --accent-yellow: #FFC107;
             --accent-red: #F44336;
             
             --white: #FFFFFF;
-            --black: #000000;
             --gray-50: #FAFAFA;
             --gray-100: #F5F5F9;
             --gray-200: #EEEEEE;
             --gray-300: #E0E0E0;
-            --gray-400: #BDBDBD;
-            --gray-500: #9E9E9E;
-            --gray-600: #757575;
-            --gray-700: #616161;
-            --gray-800: #424242;
-            --gray-900: #212121;
             
             --bg-primary: #FFFFFF;
             --bg-secondary: #F8FBFF;
-            --bg-tertiary: #E3F2FD;
             
             --text-primary: #000000;
             --text-secondary: #424242;
-            --text-tertiary: #616161;
+            --text-tertiary: #9E9E9E;
             
             --shadow-sm: 0 2px 4px rgba(33, 150, 243, 0.08);
             --shadow-md: 0 4px 8px rgba(33, 150, 243, 0.12);
             --shadow-lg: 0 8px 16px rgba(33, 150, 243, 0.15);
             --shadow-xl: 0 12px 24px rgba(33, 150, 243, 0.2);
             
-            --transition-fast: 0.2s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
-            
             --sidebar-width: 280px;
         }
 
         .dark {
             --primary: #64B5F6;
-            --primary-light: #90CAF9;
             --bg-primary: #0A0E27;
             --bg-secondary: #141B3D;
-            --bg-tertiary: #1E2749;
             --text-primary: #FFFFFF;
             --text-secondary: #E0E0E0;
-            --text-tertiary: #BDBDBD;
+            --text-tertiary: #94A3B8;
             --gray-100: #1E2749;
             --gray-200: #2A3458;
-            --gray-300: #3A4568;
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
-            --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.6);
         }
         
         * { 
@@ -84,19 +63,17 @@
 
         html {
             scroll-behavior: smooth;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-secondary);
             color: var(--text-primary);
-            overflow-x: hidden;
-            transition: all var(--transition-normal);
+            line-height: 1.6;
+            transition: all 0.3s ease;
         }
 
-        /* SIDEBAR - Same as dashboard */
+        /* Sidebar - Fixed on Desktop */
         .sidebar {
             position: fixed;
             top: 0;
@@ -105,24 +82,23 @@
             height: 100vh;
             background: var(--bg-primary);
             box-shadow: var(--shadow-xl);
-            transition: left var(--transition-normal);
+            transition: left 0.3s ease;
             z-index: 2000;
             overflow-y: auto;
-            display: flex;
-            flex-direction: column;
+            border-right: 1px solid var(--gray-200);
         }
 
-        .sidebar.active {
-            left: 0;
+        .sidebar.active { 
+            left: 0; 
         }
 
         .sidebar-header {
             padding: 1.5rem;
-            background: linear-gradient(135deg, #2196F3 0%, #00BCD4 100%);
+            background: linear-gradient(135deg, #2196F3, #00BCD4);
             color: white;
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             position: sticky;
             top: 0;
             z-index: 10;
@@ -142,7 +118,7 @@
             border-radius: 50%;
             cursor: pointer;
             font-size: 1.5rem;
-            transition: all var(--transition-fast);
+            transition: all 0.2s;
         }
 
         .sidebar-close:hover {
@@ -154,9 +130,8 @@
             padding: 1.5rem;
             border-bottom: 1px solid var(--gray-200);
             display: flex;
-            align-items: center;
             gap: 1rem;
-            transition: all var(--transition-fast);
+            transition: all 0.2s;
         }
 
         .sidebar-user:hover {
@@ -167,7 +142,7 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary-cyan) 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary-cyan));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -177,14 +152,9 @@
             box-shadow: var(--shadow-md);
         }
 
-        .sidebar-user-info {
-            flex: 1;
-        }
-
         .sidebar-user-name {
             font-weight: 700;
             font-size: 0.95rem;
-            color: var(--text-primary);
         }
 
         .sidebar-user-email {
@@ -193,7 +163,6 @@
         }
 
         .sidebar-nav {
-            flex: 1;
             padding: 1rem 0;
         }
 
@@ -206,8 +175,8 @@
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             color: var(--text-tertiary);
+            letter-spacing: 0.5px;
         }
 
         .sidebar-nav-link {
@@ -219,7 +188,7 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
-            transition: all var(--transition-fast);
+            transition: all 0.2s;
             border-left: 3px solid transparent;
             position: relative;
             overflow: hidden;
@@ -232,13 +201,9 @@
             top: 0;
             width: 0;
             height: 100%;
-            background: linear-gradient(90deg, var(--primary-lighter) 0%, transparent 100%);
-            transition: width var(--transition-normal);
+            background: linear-gradient(90deg, var(--primary-lighter), transparent);
+            transition: width 0.3s;
             z-index: -1;
-        }
-
-        .dark .sidebar-nav-link::before {
-            background: linear-gradient(90deg, var(--gray-200) 0%, transparent 100%);
         }
 
         .sidebar-nav-link:hover::before {
@@ -252,9 +217,9 @@
         }
 
         .sidebar-nav-link.active {
-            background: linear-gradient(90deg, var(--primary-lighter) 0%, transparent 100%);
             color: var(--primary);
             border-left-color: var(--primary);
+            background: linear-gradient(90deg, var(--primary-lighter), transparent);
         }
 
         .sidebar-nav-icon {
@@ -269,8 +234,8 @@
 
         .sidebar-footer-btn {
             width: 100%;
-            padding: 0.875rem 1.5rem;
-            background: linear-gradient(135deg, var(--accent-red) 0%, #dc2626 100%);
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--accent-red), #dc2626);
             color: white;
             border: none;
             border-radius: 12px;
@@ -280,7 +245,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            transition: all var(--transition-fast);
+            transition: all 0.2s;
         }
 
         .sidebar-footer-btn:hover {
@@ -290,15 +255,12 @@
 
         .sidebar-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            inset: 0;
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(4px);
             opacity: 0;
             visibility: hidden;
-            transition: all var(--transition-normal);
+            transition: all 0.3s;
             z-index: 1999;
         }
 
@@ -307,25 +269,39 @@
             visibility: visible;
         }
 
-        /* TOP HEADER */
-        .top-header {
+        /* Main Content Area - Properly Positioned */
+        .main-content {
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1rem 1.5rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: var(--text-primary);
-            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+
+        .dark .header {
+            background: rgba(10, 14, 39, 0.9);
+        }
+
+        .header.scrolled {
             box-shadow: var(--shadow-md);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             gap: 1rem;
-            transition: all var(--transition-normal);
-        }
-
-        .dark .top-header {
-            background: rgba(10, 14, 39, 0.9);
         }
 
         .menu-toggle {
@@ -337,7 +313,7 @@
             border-radius: 10px;
             cursor: pointer;
             font-size: 1.3rem;
-            transition: all var(--transition-fast);
+            transition: all 0.2s;
         }
 
         .menu-toggle:hover {
@@ -348,421 +324,536 @@
 
         .header-title {
             flex: 1;
-            font-size: 1.25rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary-cyan) 100%);
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            cursor: pointer;
+            letter-spacing: -0.5px;
         }
 
         .header-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
-        .header-btn {
-            background: var(--gray-100);
-            border: none;
-            color: var(--text-primary);
+        .icon-btn {
             width: 44px;
             height: 44px;
             border-radius: 50%;
+            border: none;
+            background: var(--gray-100);
+            color: var(--text-primary);
+            font-size: 1.25rem;
             cursor: pointer;
-            font-size: 1.2rem;
-            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
             position: relative;
             overflow: hidden;
         }
 
-        .header-btn:hover {
+        .icon-btn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--primary-light), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .icon-btn:hover::before {
+            opacity: 0.3;
+        }
+
+        .icon-btn:hover {
             background: var(--primary-lighter);
+            color: var(--primary);
             transform: translateY(-2px) scale(1.05);
         }
 
-        /* PROFILE CONTENT */
+        /* Profile Container */
         .profile-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
         }
 
-        .profile-header {
+        /* Stunning Profile Header */
+        .profile-hero {
             background: linear-gradient(135deg, #2196F3 0%, #00BCD4 100%);
-            color: white;
-            padding: 2.5rem 2rem;
-            border-radius: 20px;
+            border-radius: 24px;
+            overflow: hidden;
             box-shadow: var(--shadow-xl);
             margin-bottom: 2rem;
             position: relative;
-            overflow: hidden;
-            animation: fadeIn 0.6s ease;
+            animation: fadeInUp 0.6s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .profile-header::before {
+        .profile-hero::before {
             content: '';
             position: absolute;
             top: -50%;
             right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            border-radius: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .profile-header-content {
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -20px); }
+        }
+
+        .profile-hero-content {
+            padding: 3rem 2rem 2rem;
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
             position: relative;
-            flex-wrap: wrap;
+            z-index: 1;
         }
 
-        .profile-avatar-wrapper {
+        .avatar-section {
+            position: relative;
+            animation: scaleIn 0.5s ease 0.2s backwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .avatar-wrapper {
             position: relative;
         }
 
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
+        .avatar {
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            border: 6px solid rgba(255,255,255,0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4.5rem;
             color: white;
-            font-weight: 700;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            border: 4px solid rgba(255,255,255,0.3);
-            position: relative;
+            font-weight: 900;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .avatar-upload-btn {
+        .avatar:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .avatar-upload {
             position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 40px;
-            height: 40px;
+            bottom: 8px;
+            right: 8px;
+            width: 48px;
+            height: 48px;
             background: var(--secondary-green);
-            border: 3px solid white;
+            border: 4px solid white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
-            transition: all var(--transition-fast);
-            box-shadow: var(--shadow-md);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-lg);
         }
 
-        .avatar-upload-btn:hover {
-            transform: scale(1.1);
-            background: var(--secondary-cyan);
+        .avatar-upload:hover {
+            transform: scale(1.15) rotate(15deg);
+            background: var(--primary);
         }
 
-        .avatar-upload-input {
+        .avatar-upload input {
             display: none;
         }
 
-        .profile-info {
+        .profile-details {
             flex: 1;
-            min-width: 250px;
+            color: white;
+            animation: fadeInRight 0.6s ease 0.3s backwards;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .profile-name {
-            font-size: 2rem;
-            font-weight: 800;
+            font-size: 2.8rem;
+            font-weight: 900;
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            letter-spacing: -1px;
         }
 
         .profile-email {
-            font-size: 1rem;
+            font-size: 1.15rem;
             opacity: 0.95;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            font-weight: 500;
         }
 
-        .profile-meta {
+        .profile-badges {
             display: flex;
-            gap: 2rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
+            margin-bottom: 1.5rem;
         }
 
-        .meta-item {
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.1rem;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .badge:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .profile-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 12px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
-            opacity: 0.95;
         }
 
-        .meta-item span:first-child {
-            font-size: 1.2rem;
+        .profile-btn:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
         }
 
-        /* Stats Cards */
-        .stats-row {
+        /* Stats Bar */
+        .stats-bar {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
         }
 
-        .stat-mini-card {
-            background: var(--bg-primary);
-            padding: 1.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 2px solid var(--gray-200);
-            transition: all var(--transition-fast);
+        .stat-card {
+            text-align: center;
+            color: white;
+            transition: all 0.3s;
             cursor: pointer;
         }
 
-        .stat-mini-card:hover {
+        .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
         }
 
-        .stat-mini-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 900;
+            display: block;
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        .stat-mini-icon {
-            font-size: 1.8rem;
-        }
-
-        .stat-mini-trend {
-            font-size: 0.75rem;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 700;
-        }
-
-        .trend-up {
-            background: rgba(76, 175, 80, 0.1);
-            color: var(--secondary-green);
-        }
-
-        .trend-down {
-            background: rgba(244, 67, 54, 0.1);
-            color: var(--accent-red);
-        }
-
-        .stat-mini-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-mini-label {
-            font-size: 0.85rem;
-            color: var(--text-tertiary);
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.95;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .profile-tabs {
-            display: flex;
-            gap: 0.5rem;
+        /* Tabs */
+        .tabs-container {
             margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease 0.4s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.75rem;
             overflow-x: auto;
             padding-bottom: 0.5rem;
         }
 
-        .profile-tabs::-webkit-scrollbar {
+        .tabs::-webkit-scrollbar {
             height: 4px;
         }
 
-        .profile-tabs::-webkit-scrollbar-thumb {
+        .tabs::-webkit-scrollbar-thumb {
             background: var(--primary-light);
             border-radius: 4px;
         }
 
-        .tab-btn {
-            padding: 0.875rem 1.5rem;
+        .tab {
+            padding: 1rem 1.75rem;
             background: var(--bg-primary);
             border: 2px solid var(--gray-200);
-            border-radius: 12px;
+            border-radius: 16px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .tab-btn:hover {
+        .tab::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary-cyan));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tab:hover {
             border-color: var(--primary);
             color: var(--primary);
             transform: translateY(-2px);
         }
 
-        .tab-btn.active {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
         }
 
-        .tab-content {
+        .tab-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Content Sections */
+        .content-wrapper {
+            animation: fadeInUp 0.6s ease 0.5s backwards;
+        }
+
+        .content-section {
             display: none;
+        }
+
+        .content-section.active {
+            display: block;
             animation: fadeIn 0.4s ease;
         }
 
-        .tab-content.active {
-            display: block;
-        }
-
-        .profile-card {
+        .card {
             background: var(--bg-primary);
-            padding: 2rem;
             border-radius: 20px;
+            padding: 2.5rem;
             box-shadow: var(--shadow-md);
-            margin-bottom: 1.5rem;
-            border: 2px solid var(--gray-200);
-            animation: fadeIn 0.6s ease;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
         }
 
-        .profile-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-200);
         }
 
-        .detail-grid {
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary-cyan));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--text-primary);
+        }
+
+        /* Info Grid */
+        .info-grid {
             display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
         }
 
-        .detail-item {
-            display: flex;
-            align-items: start;
-            gap: 1rem;
-            padding: 1rem;
+        .info-item {
             background: var(--bg-secondary);
-            border-radius: 12px;
+            padding: 1.75rem;
+            border-radius: 16px;
             border: 2px solid var(--gray-200);
-            transition: all var(--transition-fast);
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .detail-item:hover {
+        .info-item:hover {
             border-color: var(--primary-light);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
-        .detail-icon {
-            font-size: 1.8rem;
-            min-width: 40px;
-            text-align: center;
-        }
-
-        .detail-content {
-            flex: 1;
-        }
-
-        .detail-label {
+        .info-label {
             font-size: 0.8rem;
             color: var(--text-tertiary);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.25rem;
+            letter-spacing: 0.8px;
+            margin-bottom: 0.75rem;
         }
 
-        .detail-value {
-            font-size: 1rem;
-            font-weight: 600;
+        .info-value {
+            font-size: 1.15rem;
+            font-weight: 700;
             color: var(--text-primary);
         }
 
-        .detail-value.empty {
+        .info-value.empty {
             color: var(--text-tertiary);
             font-style: italic;
+            font-weight: 500;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        /* Form Styles */
+        .form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-field.full {
+            grid-column: 1 / -1;
         }
 
         .form-label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .form-input {
+        .form-input, .form-select, .form-textarea {
             width: 100%;
-            padding: 0.875rem 1rem;
+            padding: 1rem 1.25rem;
             border: 2px solid var(--gray-300);
-            border-radius: 10px;
-            font-size: 0.95rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-family: 'Inter', sans-serif;
             background: var(--bg-secondary);
             color: var(--text-primary);
-            transition: all var(--transition-fast);
+            transition: all 0.3s;
+            font-weight: 500;
         }
 
-        .form-input:focus {
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-lighter);
+            box-shadow: 0 0 0 4px var(--primary-lighter);
+            background: var(--bg-primary);
         }
 
-        .form-input:disabled {
-            background: var(--gray-100);
-            cursor: not-allowed;
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .form-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats-row {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .btn-primary {
-            padding: 0.875rem 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all var(--transition-fast);
+            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             position: relative;
             overflow: hidden;
         }
 
-        .btn-primary::before {
+        .btn::before {
             content: '';
             position: absolute;
             top: 50%;
@@ -772,37 +863,29 @@
             background: rgba(255,255,255,0.3);
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            transition: width var(--transition-normal), height var(--transition-normal);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .btn-primary:hover::before {
+        .btn:hover::before {
             width: 300px;
             height: 300px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow-md);
         }
 
-        .btn-primary:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
         }
 
         .btn-secondary {
-            padding: 0.875rem 2rem;
             background: var(--bg-secondary);
             color: var(--text-primary);
             border: 2px solid var(--gray-300);
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .btn-secondary:hover {
@@ -812,159 +895,142 @@
         }
 
         .btn-danger {
-            padding: 0.875rem 2rem;
-            background: linear-gradient(135deg, var(--accent-red) 0%, #dc2626 100%);
+            background: linear-gradient(135deg, var(--accent-red), #dc2626);
             color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            box-shadow: var(--shadow-md);
         }
 
         .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
         }
 
-        .form-actions {
+        .btn-group {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
+            margin-top: 2.5rem;
         }
 
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 54px;
-            height: 28px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--gray-300);
-            transition: 0.3s;
-            border-radius: 28px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-        }
-
-        input:checked + .toggle-slider {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-        }
-
-        input:checked + .toggle-slider:before {
-            transform: translateX(26px);
+        /* Toggle Switch */
+        .preference-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .preference-item {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 1rem;
+            align-items: center;
+            padding: 1.5rem;
             background: var(--bg-secondary);
-            border-radius: 12px;
-            margin-bottom: 1rem;
+            border-radius: 16px;
             border: 2px solid var(--gray-200);
-            transition: all var(--transition-fast);
+            transition: all 0.3s;
         }
 
         .preference-item:hover {
             border-color: var(--primary-light);
+            transform: translateX(4px);
         }
 
         .preference-info h4 {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 0.25rem;
-            color: var(--text-primary);
+            font-weight: 800;
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
         }
 
         .preference-info p {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-tertiary);
         }
 
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 32px;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--gray-300);
+            border-radius: 32px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle-slider::before {
+            position: absolute;
+            content: "";
+            height: 24px;
+            width: 24px;
+            left: 4px;
+            bottom: 4px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        input:checked + .toggle-slider {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        input:checked + .toggle-slider::before {
+            transform: translateX(28px);
+        }
+
+        /* Toast */
         .toast {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
+            bottom: 2rem;
+            right: 2rem;
             background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
+            padding: 1.25rem 1.75rem;
+            border-radius: 16px;
             box-shadow: var(--shadow-xl);
             z-index: 10000;
-            min-width: 250px;
-            opacity: 0;
-            transition: all var(--transition-normal);
-            font-weight: 600;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 5px solid var(--secondary-green);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 300px;
         }
 
         .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        .toast.success {
-            border-left: 4px solid var(--secondary-green);
+            transform: translateX(0);
         }
 
         .toast.error {
-            border-left: 4px solid var(--accent-red);
+            border-left-color: var(--accent-red);
         }
 
-        .badge {
-            display: inline-flex;
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--secondary-green);
+            color: white;
+            display: flex;
             align-items: center;
-            gap: 0.25rem;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
+            justify-content: center;
+            font-size: 1.2rem;
         }
 
-        .badge-verified {
-            background: rgba(76, 175, 80, 0.1);
-            color: var(--secondary-green);
+        .toast.error .toast-icon {
+            background: var(--accent-red);
         }
 
-        .badge-premium {
-            background: rgba(255, 193, 7, 0.1);
-            color: var(--accent-yellow);
-        }
-
+        /* Desktop Layout - Content doesn't hide behind sidebar */
         @media (min-width: 1024px) {
-            body {
-                margin-left: var(--sidebar-width);
-            }
-
             .sidebar {
                 left: 0;
             }
@@ -980,6 +1046,53 @@
             .sidebar-overlay {
                 display: none;
             }
+
+            /* Push main content to the right */
+            .main-content {
+                margin-left: var(--sidebar-width);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1023px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-hero-content {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+
+            .profile-name {
+                font-size: 2rem;
+            }
+
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .form, .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.75rem;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .profile-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -992,11 +1105,11 @@
             <button class="sidebar-close" id="sidebarClose">×</button>
         </div>
 
-        <div class="sidebar-user" id="sidebarUser">
-            <div class="sidebar-user-avatar">👤</div>
-            <div class="sidebar-user-info">
-                <div class="sidebar-user-name">Guest User</div>
-                <div class="sidebar-user-email">guest@talk2trend.com</div>
+        <div class="sidebar-user">
+            <div class="sidebar-user-avatar" id="sidebarAvatar">U</div>
+            <div>
+                <div class="sidebar-user-name" id="sidebarName">Guest</div>
+                <div class="sidebar-user-email" id="sidebarEmail">guest@talk2trend.com</div>
             </div>
         </div>
 
@@ -1021,23 +1134,11 @@
                 </a>
                 <a href="orders.html" class="sidebar-nav-link">
                     <span class="sidebar-nav-icon">📦</span>
-                    <span>My Orders</span>
+                    <span>Orders</span>
                 </a>
                 <a href="profile.html" class="sidebar-nav-link active">
                     <span class="sidebar-nav-icon">👤</span>
                     <span>Profile</span>
-                </a>
-            </div>
-
-            <div class="sidebar-nav-section">
-                <div class="sidebar-nav-title">Account</div>
-                <a href="#" class="sidebar-nav-link" id="authLink">
-                    <span class="sidebar-nav-icon">🔐</span>
-                    <span>Login</span>
-                </a>
-                <a href="signup.html" class="sidebar-nav-link">
-                    <span class="sidebar-nav-icon">📝</span>
-                    <span>Sign Up</span>
                 </a>
             </div>
 
@@ -1058,743 +1159,536 @@
         </div>
     </aside>
 
-    <main>
-        <header class="top-header">
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            <h1 class="header-title">My Profile</h1>
-            <div class="header-actions">
-                <button class="header-btn" id="darkModeToggle">🌙</button>
+    <!-- Main Content Wrapper -->
+    <div class="main-content">
+        <header class="header" id="header">
+            <div class="header-content">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div class="header-title" onclick="window.location.href='index.html'">Talk2Trend</div>
+                <div class="header-actions">
+                    <button class="icon-btn" onclick="window.location.href='dashboard.html'" title="Dashboard">📊</button>
+                    <button class="icon-btn" id="darkModeBtn" title="Dark Mode">🌙</button>
+                    <button class="icon-btn" onclick="window.location.href='cart.html'" title="Cart">🛒</button>
+                </div>
             </div>
         </header>
 
         <div class="profile-container">
-            <section class="profile-header">
-                <div class="profile-header-content">
-                    <div class="profile-avatar-wrapper">
-                        <div class="profile-avatar" id="profileAvatar">👤</div>
-                        <label for="avatarUpload" class="avatar-upload-btn" title="Change photo">📷</label>
-                        <input type="file" id="avatarUpload" class="avatar-upload-input" accept="image/*">
+            <!-- Hero Section -->
+            <div class="profile-hero">
+                <div class="profile-hero-content">
+                    <div class="avatar-section">
+                        <div class="avatar-wrapper">
+                            <div class="avatar" id="avatarDisplay">
+                                <span id="avatarLetter">U</span>
+                            </div>
+                            <label class="avatar-upload" for="avatarUpload" title="Change Photo">📷
+                                <input type="file" id="avatarUpload" accept="image/*">
+                            </label>
+                        </div>
                     </div>
-                    <div class="profile-info">
-                        <h2 class="profile-name" id="profileName">Loading...</h2>
-                        <p class="profile-email">
-                            <span id="profileEmail">Loading...</span>
-                            <span class="badge badge-verified">✓ Verified</span>
-                        </p>
-                        <div class="profile-meta">
-                            <div class="meta-item">
-                                <span>📅</span>
-                                <span>Joined <span id="joinDate">Jan 2025</span></span>
-                            </div>
-                            <div class="meta-item">
-                                <span>📍</span>
-                                <span id="userLocation">India</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>⏰</span>
-                                <span>Last seen <span id="lastSeen">today</span></span>
-                            </div>
+                    <div class="profile-details">
+                        <h1 class="profile-name" id="profileName">Loading...</h1>
+                        <p class="profile-email" id="profileEmail">loading@email.com</p>
+                        <div class="profile-badges">
+                            <span class="badge">✓ Verified Account</span>
+                            <span class="badge">⭐ Active Member</span>
+                            <span class="badge" id="memberBadge">📅 0 days</span>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="profile-btn" onclick="document.querySelector('[data-tab=personal]').click()">
+                                <span>✏️</span>
+                                <span>Edit Profile</span>
+                            </button>
+                            <button class="profile-btn" onclick="document.querySelector('[data-tab=security]').click()">
+                                <span>🔒</span>
+                                <span>Security</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Stats Row -->
-            <div class="stats-row">
-                <div class="stat-mini-card">
-                    <div class="stat-mini-header">
-                        <span class="stat-mini-icon">📦</span>
-                        <span class="stat-mini-trend trend-up">↑ 12%</span>
+                <div class="stats-bar">
+                    <div class="stat-card">
+                        <span class="stat-value" id="totalOrders">0</span>
+                        <span class="stat-label">Total Orders</span>
                     </div>
-                    <div class="stat-mini-value" id="totalOrders">0</div>
-                    <div class="stat-mini-label">Total Orders</div>
-                </div>
-                <div class="stat-mini-card">
-                    <div class="stat-mini-header">
-                        <span class="stat-mini-icon">💰</span>
-                        <span class="stat-mini-trend trend-up">↑ 8%</span>
+                    <div class="stat-card">
+                        <span class="stat-value" id="totalSpent">₹0</span>
+                        <span class="stat-label">Total Spent</span>
                     </div>
-                    <div class="stat-mini-value" id="totalSpent">₹0</div>
-                    <div class="stat-mini-label">Total Spent</div>
-                </div>
-                <div class="stat-mini-card">
-                    <div class="stat-mini-header">
-                        <span class="stat-mini-icon">🛒</span>
+                    <div class="stat-card">
+                        <span class="stat-value" id="cartItems">0</span>
+                        <span class="stat-label">Cart Items</span>
                     </div>
-                    <div class="stat-mini-value" id="cartItems">0</div>
-                    <div class="stat-mini-label">Cart Items</div>
-                </div>
-                <div class="stat-mini-card">
-                    <div class="stat-mini-header">
-                        <span class="stat-mini-icon">❤️</span>
+                    <div class="stat-card">
+                        <span class="stat-value" id="loyaltyPoints">0</span>
+                        <span class="stat-label">Points</span>
                     </div>
-                    <div class="stat-mini-value" id="wishlistCount">0</div>
-                    <div class="stat-mini-label">Wishlist</div>
                 </div>
             </div>
 
-            <div class="profile-tabs">
-                <button class="tab-btn active" data-tab="overview">
-                    <span>📋</span>
-                    <span>Overview</span>
-                </button>
-                <button class="tab-btn" data-tab="personal">
-                    <span>👤</span>
-                    <span>Personal Info</span>
-                </button>
-                <button class="tab-btn" data-tab="security">
-                    <span>🔒</span>
-                    <span>Security</span>
-                </button>
-                <button class="tab-btn" data-tab="preferences">
-                    <span>⚙️</span>
-                    <span>Preferences</span>
-                </button>
-                <button class="tab-btn" data-tab="addresses">
-                    <span>📍</span>
-                    <span>Addresses</span>
-                </button>
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="overview">
+                        <span class="tab-icon">📋</span>
+                        <span>Overview</span>
+                    </div>
+                    <div class="tab" data-tab="personal">
+                        <span class="tab-icon">👤</span>
+                        <span>Personal Info</span>
+                    </div>
+                    <div class="tab" data-tab="security">
+                        <span class="tab-icon">🔒</span>
+                        <span>Security</span>
+                    </div>
+                    <div class="tab" data-tab="preferences">
+                        <span class="tab-icon">⚙️</span>
+                        <span>Preferences</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- Overview Tab -->
-            <div class="tab-content active" id="overview">
-                <div class="profile-card">
-                    <h3>📋 Account Details</h3>
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <div class="detail-icon">📧</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Email Address</div>
-                                <div class="detail-value" id="detailEmail">Loading...</div>
+            <!-- Content -->
+            <div class="content-wrapper">
+                <!-- Overview -->
+                <div class="content-section active" id="overview">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📋</div>
+                            <h2 class="card-title">Account Information</h2>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-label">📧 Email Address</div>
+                                <div class="info-value" id="infoEmail">loading...</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">📱 Phone Number</div>
+                                <div class="info-value empty" id="infoPhone">Not provided</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">🎂 Date of Birth</div>
+                                <div class="info-value empty" id="infoDOB">Not provided</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">⚧ Gender</div>
+                                <div class="info-value empty" id="infoGender">Not provided</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">🌍 Language</div>
+                                <div class="info-value" id="infoLanguage">English</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">📅 Member Since</div>
+                                <div class="info-value" id="infoMemberSince">January 2025</div>
                             </div>
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">📱</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Phone Number</div>
-                                <div class="detail-value" id="detailPhone" class="empty">Not provided</div>
-                            </div>
+                    </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="content-section" id="personal">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">👤</div>
+                            <h2 class="card-title">Personal Information</h2>
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">🎂</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Date of Birth</div>
-                                <div class="detail-value" id="detailDOB" class="empty">Not provided</div>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">📍</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Location</div>
-                                <div class="detail-value" id="detailLocation" class="empty">Not provided</div>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">💼</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Account Type</div>
-                                <div class="detail-value">
-                                    <span id="accountType">Standard</span>
-                                    <span class="badge badge-premium" style="margin-left: 8px;">⭐ Active</span>
+                        <form id="personalForm">
+                            <div class="form">
+                                <div class="form-field">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" class="form-input" id="firstName" placeholder="Enter first name" required>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" class="form-input" id="lastName" placeholder="Enter last name">
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-input" id="phone" placeholder="+91 98765 43210">
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-input" id="dob">
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Gender</label>
+                                    <select class="form-select" id="gender">
+                                        <option value="">Select gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Language</label>
+                                    <select class="form-select" id="language">
+                                        <option value="en">English</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="mr">Marathi</option>
+                                    </select>
+                                </div>
+                                <div class="form-field full">
+                                    <label class="form-label">Bio</label>
+                                    <textarea class="form-textarea" id="bio" placeholder="Tell us about yourself..."></textarea>
                                 </div>
                             </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">📅</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Member Since</div>
-                                <div class="detail-value" id="memberSince">January 2025</div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <span>💾</span>
+                                    <span>Save Changes</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                    <span>↺</span>
+                                    <span>Reset</span>
+                                </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 
-                <div class="profile-card">
-                    <h3>📊 Shopping Summary</h3>
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <div class="detail-icon">🎯</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Lifetime Orders</div>
-                                <div class="detail-value" id="lifetimeOrders">0 orders</div>
+                <!-- Security -->
+                <div class="content-section" id="security">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🔒</div>
+                            <h2 class="card-title">Change Password</h2>
+                        </div>
+                        <form id="passwordForm">
+                            <div class="form">
+                                <div class="form-field full">
+                                    <label class="form-label">Current Password *</label>
+                                    <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password" required>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">New Password *</label>
+                                    <input type="password" class="form-input" id="newPassword" placeholder="Enter new password" required>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label">Confirm Password *</label>
+                                    <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">💵</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Total Amount Spent</div>
-                                <div class="detail-value" id="lifetimeSpent">₹0</div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <span>🔐</span>
+                                    <span>Update Password</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">📦</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Average Order Value</div>
-                                <div class="detail-value" id="avgOrderValue">₹0</div>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <div class="detail-icon">⭐</div>
-                            <div class="detail-content">
-                                <div class="detail-label">Loyalty Points</div>
-                                <div class="detail-value" id="loyaltyPoints">0 points</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Personal Info Tab -->
-            <div class="tab-content" id="personal">
-                <div class="profile-card">
-                    <h3>👤 Personal Information</h3>
-                    <form id="personalInfoForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">First Name *</label>
-                                <input type="text" class="form-input" id="firstName" placeholder="Enter first name" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Last Name</label>
-                                <input type="text" class="form-input" id="lastName" placeholder="Enter last name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email Address *</label>
-                            <input type="email" class="form-input" id="email" placeholder="your@email.com" disabled>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Phone Number</label>
-                                <input type="tel" class="form-input" id="phone" placeholder="+91 98765 43210">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Date of Birth</label>
-                                <input type="date" class="form-input" id="dob">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Gender</label>
-                                <select class="form-input" id="gender">
-                                    <option value="">Select gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                    <option value="prefer-not-to-say">Prefer not to say</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Language Preference</label>
-                                <select class="form-input" id="language">
-                                    <option value="en">English</option>
-                                    <option value="hi">Hindi</option>
-                                    <option value="mr">Marathi</option>
-                                    <option value="ta">Tamil</option>
-                                    <option value="te">Telugu</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Bio</label>
-                            <textarea class="form-input" id="bio" rows="3" placeholder="Tell us about yourself..."></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-primary">
-                                <span>💾</span>
-                                <span>Save Changes</span>
-                            </button>
-                            <button type="button" class="btn-secondary" onclick="resetPersonalForm()">
-                                <span>↺</span>
-                                <span>Reset</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Security Tab -->
-            <div class="tab-content" id="security">
-                <div class="profile-card">
-                    <h3>🔒 Change Password</h3>
-                    <form id="passwordForm">
-                        <div class="form-group">
-                            <label class="form-label">Current Password *</label>
-                            <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">New Password *</label>
-                            <input type="password" class="form-input" id="newPassword" placeholder="Enter new password" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Confirm New Password *</label>
-                            <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password" required>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-primary">
-                                <span>🔐</span>
-                                <span>Update Password</span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="profile-card">
-                    <h3>⚠️ Danger Zone</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                        Once you delete your account, there is no going back. Please be certain.
-                    </p>
-                    <button class="btn-danger" onclick="confirmDeleteAccount()">
-                        <span>🗑️</span>
-                        <span>Delete Account</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Preferences Tab -->
-            <div class="tab-content" id="preferences">
-                <div class="profile-card">
-                    <h3>⚙️ Account Preferences</h3>
-                    
-                    <div class="preference-item">
-                        <div class="preference-info">
-                            <h4>Email Notifications</h4>
-                            <p>Receive order updates and promotions</p>
-                        </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="emailNotif" checked>
-                            <span class="toggle-slider"></span>
-                        </label>
+                        </form>
                     </div>
 
-                    <div class="preference-item">
-                        <div class="preference-info">
-                            <h4>SMS Notifications</h4>
-                            <p>Get order alerts via text message</p>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">⚠️</div>
+                            <h2 class="card-title">Danger Zone</h2>
                         </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="smsNotif">
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="preference-item">
-                        <div class="preference-info">
-                            <h4>Marketing Communications</h4>
-                            <p>Receive exclusive deals and offers</p>
-                        </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="marketing" checked>
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="preference-item">
-                        <div class="preference-info">
-                            <h4>Dark Mode</h4>
-                            <p>Switch between light and dark theme</p>
-                        </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="darkModeToggleSwitch">
-                            <span class="toggle-slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="form-actions">
-                        <button class="btn-primary" onclick="savePreferences()">
-                            <span>💾</span>
-                            <span>Save Preferences</span>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.05rem;">
+                            Once you delete your account, there is no going back. Please be certain.
+                        </p>
+                        <button class="btn btn-danger" onclick="deleteAccount()">
+                            <span>🗑️</span>
+                            <span>Delete Account Permanently</span>
                         </button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Addresses Tab -->
-            <div class="tab-content" id="addresses">
-                <div class="profile-card">
-                    <h3>📍 Saved Addresses</h3>
-                    <form id="addressForm">
-                        <div class="form-group">
-                            <label class="form-label">Address Label *</label>
-                            <input type="text" class="form-input" id="addressLabel" placeholder="Home, Office, etc." required>
+                <!-- Preferences -->
+                <div class="content-section" id="preferences">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">⚙️</div>
+                            <h2 class="card-title">Preferences</h2>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Full Name *</label>
-                            <input type="text" class="form-input" id="addressName" placeholder="Recipient name" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Street Address *</label>
-                            <input type="text" class="form-input" id="street" placeholder="House no, Building, Street" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Landmark</label>
-                            <input type="text" class="form-input" id="landmark" placeholder="Nearby landmark (optional)">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">City *</label>
-                                <input type="text" class="form-input" id="city" placeholder="City" required>
+                        
+                        <div class="preference-list">
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Email Notifications</h4>
+                                    <p>Receive order updates and promotional emails</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="emailNotif" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">State *</label>
-                                <input type="text" class="form-input" id="state" placeholder="State" required>
+
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>SMS Notifications</h4>
+                                    <p>Get order alerts via text message</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="smsNotif">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Marketing Communications</h4>
+                                    <p>Receive exclusive deals and special offers</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="marketing" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">PIN Code *</label>
-                                <input type="text" class="form-input" id="pincode" placeholder="PIN Code" required maxlength="6">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Country</label>
-                                <input type="text" class="form-input" id="country" value="India" readonly>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn-primary">
-                                <span>📍</span>
-                                <span>Save Address</span>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="savePrefs()">
+                                <span>💾</span>
+                                <span>Save Preferences</span>
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <div class="toast" id="toast">
+        <div class="toast-icon" id="toastIcon">✓</div>
         <span id="toastMessage"></span>
     </div>
 
     <script>
-        const BASE_URL = "https://talk2trend-5.onrender.com";
         const token = localStorage.getItem('token');
         const savedEmail = localStorage.getItem('email');
         const savedName = localStorage.getItem('name');
-        
-        const sidebar = document.getElementById('sidebar');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebarClose = document.getElementById('sidebarClose');
-
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.add('active');
-            sidebarOverlay.classList.add('active');
-        });
-
-        sidebarClose.addEventListener('click', closeSidebar);
-        sidebarOverlay.addEventListener('click', closeSidebar);
-
-        function closeSidebar() {
-            sidebar.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-        }
 
         if (!token) {
-            alert("Please login first to access your profile.");
+            alert("Please login first");
             window.location.href = "login.html";
         }
 
-        function initAuth() {
-            const authLink = document.getElementById('authLink');
-            const sidebarUser = document.getElementById('sidebarUser');
-            const sidebarFooter = document.getElementById('sidebarFooter');
+        // Sidebar
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebarClose = document.getElementById('sidebarClose');
 
-            if (token && savedName) {
-                authLink.innerHTML = '<span class="sidebar-nav-icon">👤</span><span>Profile</span>';
-                authLink.href = 'profile.html';
-                
-                const avatar = sidebarUser.querySelector('.sidebar-user-avatar');
-                const nameEl = sidebarUser.querySelector('.sidebar-user-name');
-                const emailEl = sidebarUser.querySelector('.sidebar-user-email');
-                
-                avatar.textContent = savedName.charAt(0).toUpperCase();
-                nameEl.textContent = savedName;
-                emailEl.textContent = savedEmail || 'user@talk2trend.com';
-                
-                sidebarFooter.style.display = 'block';
-                document.getElementById('logoutBtn').addEventListener('click', () => {
-                    localStorage.clear();
-                    window.location.href = "login.html";
-                });
-            }
-        }
+        menuToggle?.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
 
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            toastMessage.textContent = message;
-            toast.className = `toast ${type}`;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
-        }
-
-        // Fetch Cart and Orders Data
-        async function fetchUserStats() {
-            try {
-                const cartResponse = await fetch(`${BASE_URL}/api/cart`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const cartData = await cartResponse.json();
-                const cartItems = cartData.items || [];
-
-                let totalItems = 0;
-                let cartTotal = 0;
-                cartItems.forEach(item => {
-                    const quantity = parseInt(item.quantity || 0);
-                    const price = parseFloat(item.productId?.price || 0);
-                    totalItems += quantity;
-                    cartTotal += price * quantity;
-                });
-
-                document.getElementById('cartItems').textContent = totalItems;
-                document.getElementById('totalSpent').textContent = '₹' + cartTotal.toLocaleString('en-IN');
-
-                const ordersResponse = await fetch(`${BASE_URL}/api/orders`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const orders = await ordersResponse.json();
-                const totalOrders = orders.length;
-
-                document.getElementById('totalOrders').textContent = totalOrders;
-                document.getElementById('lifetimeOrders').textContent = `${totalOrders} orders`;
-
-                let lifetimeSpent = 0;
-                orders.forEach(order => {
-                    lifetimeSpent += parseFloat(order.totalAmount || 0);
-                });
-                document.getElementById('lifetimeSpent').textContent = '₹' + lifetimeSpent.toLocaleString('en-IN');
-
-                const avgOrder = totalOrders > 0 ? lifetimeSpent / totalOrders : 0;
-                document.getElementById('avgOrderValue').textContent = '₹' + avgOrder.toLocaleString('en-IN', {maximumFractionDigits: 0});
-
-                const loyaltyPoints = Math.floor(lifetimeSpent / 100);
-                document.getElementById('loyaltyPoints').textContent = loyaltyPoints + ' points';
-
-                const wishlistCount = parseInt(localStorage.getItem('wishlistCount') || '0');
-                document.getElementById('wishlistCount').textContent = wishlistCount;
-
-            } catch (error) {
-                console.error('Error fetching stats:', error);
-            }
-        }
-
-        // Load Profile Data
-        function loadProfileData() {
-            document.getElementById('profileName').textContent = savedName || 'User';
-            document.getElementById('profileEmail').textContent = savedEmail || 'user@talk2trend.com';
-            document.getElementById('profileAvatar').textContent = (savedName || 'U').charAt(0).toUpperCase();
-
-            document.getElementById('detailEmail').textContent = savedEmail || 'Not provided';
-
-            const nameParts = (savedName || '').split(' ');
-            document.getElementById('firstName').value = nameParts[0] || '';
-            document.getElementById('lastName').value = nameParts.slice(1).join(' ') || '';
-            document.getElementById('email').value = savedEmail || '';
-
-            const phone = localStorage.getItem('phone') || '';
-            const dob = localStorage.getItem('dob') || '';
-            const bio = localStorage.getItem('bio') || '';
-            const gender = localStorage.getItem('gender') || '';
-            const language = localStorage.getItem('language') || 'en';
-
-            document.getElementById('phone').value = phone;
-            document.getElementById('dob').value = dob;
-            document.getElementById('bio').value = bio;
-            document.getElementById('gender').value = gender;
-            document.getElementById('language').value = language;
-
-            document.getElementById('detailPhone').textContent = phone || 'Not provided';
-            document.getElementById('detailPhone').className = phone ? 'detail-value' : 'detail-value empty';
-
-            if (dob) {
-                const dobDate = new Date(dob);
-                document.getElementById('detailDOB').textContent = dobDate.toLocaleDateString('en-IN');
-                document.getElementById('detailDOB').className = 'detail-value';
-            }
-
-            const joinDate = localStorage.getItem('joinDate') || 'January 2025';
-            document.getElementById('joinDate').textContent = joinDate;
-            document.getElementById('memberSince').textContent = joinDate;
-
-            const savedAddress = JSON.parse(localStorage.getItem('savedAddress') || '{}');
-            if (savedAddress.city && savedAddress.state) {
-                document.getElementById('detailLocation').textContent = `${savedAddress.city}, ${savedAddress.state}`;
-                document.getElementById('detailLocation').className = 'detail-value';
-                document.getElementById('userLocation').textContent = `${savedAddress.city}, India`;
-            }
-        }
-
-        // Tab Navigation
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabName = btn.dataset.tab;
-                
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                btn.classList.add('active');
-                document.getElementById(tabName).classList.add('active');
+        [sidebarClose, overlay].forEach(el => {
+            el?.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
             });
         });
 
-        // Personal Info Form
-        document.getElementById('personalInfoForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const phone = document.getElementById('phone').value;
-            const dob = document.getElementById('dob').value;
-            const bio = document.getElementById('bio').value;
-            const gender = document.getElementById('gender').value;
-            const language = document.getElementById('language').value;
-
-            const fullName = `${firstName} ${lastName}`.trim();
-            localStorage.setItem('name', fullName);
-            localStorage.setItem('phone', phone);
-            localStorage.setItem('dob', dob);
-            localStorage.setItem('bio', bio);
-            localStorage.setItem('gender', gender);
-            localStorage.setItem('language', language);
-
-            loadProfileData();
-            showToast('✅ Profile updated successfully!', 'success');
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
 
-        function resetPersonalForm() {
-            loadProfileData();
-            showToast('Form reset to saved values', 'success');
+        // Auth
+        function initAuth() {
+            if (token && savedName) {
+                document.getElementById('sidebarAvatar').textContent = savedName[0].toUpperCase();
+                document.getElementById('sidebarName').textContent = savedName;
+                document.getElementById('sidebarEmail').textContent = savedEmail;
+                document.getElementById('sidebarFooter').style.display = 'block';
+                
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    if (confirm('Are you sure you want to logout?')) {
+                        localStorage.clear();
+                        window.location.href = "login.html";
+                    }
+                });
+            }
         }
 
-        // Password Form
+        // Profile
+        function initProfile() {
+            const [first, ...rest] = (savedName || '').split(' ');
+            
+            document.getElementById('profileName').textContent = savedName || 'User';
+            document.getElementById('profileEmail').textContent = savedEmail || 'user@email.com';
+            document.getElementById('avatarLetter').textContent = first[0]?.toUpperCase() || 'U';
+            document.getElementById('infoEmail').textContent = savedEmail;
+            document.getElementById('firstName').value = first || '';
+            document.getElementById('lastName').value = rest.join(' ');
+            
+            const phone = localStorage.getItem('phone') || '';
+            const dob = localStorage.getItem('dob') || '';
+            const gender = localStorage.getItem('gender') || '';
+            const bio = localStorage.getItem('bio') || '';
+            const language = localStorage.getItem('language') || 'en';
+            
+            document.getElementById('phone').value = phone;
+            document.getElementById('dob').value = dob;
+            document.getElementById('gender').value = gender;
+            document.getElementById('bio').value = bio;
+            document.getElementById('language').value = language;
+            
+            if (phone) {
+                document.getElementById('infoPhone').textContent = phone;
+                document.getElementById('infoPhone').classList.remove('empty');
+            }
+            
+            if (dob) {
+                const date = new Date(dob);
+                document.getElementById('infoDOB').textContent = date.toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+                document.getElementById('infoDOB').classList.remove('empty');
+            }
+            
+            if (gender) {
+                document.getElementById('infoGender').textContent = gender.charAt(0).toUpperCase() + gender.slice(1);
+                document.getElementById('infoGender').classList.remove('empty');
+            }
+
+            document.getElementById('infoLanguage').textContent = language === 'en' ? 'English' : language === 'hi' ? 'Hindi' : 'Marathi';
+
+            const joinDate = new Date(localStorage.getItem('joinDate') || Date.now());
+            const days = Math.floor((Date.now() - joinDate) / 86400000);
+            document.getElementById('memberBadge').textContent = `📅 ${days || 1} ${days === 1 ? 'day' : 'days'}`;
+            
+            const memberSince = joinDate.toLocaleDateString('en-IN', {
+                month: 'long',
+                year: 'numeric'
+            });
+            document.getElementById('infoMemberSince').textContent = memberSince;
+        }
+
+        // Tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // Forms
+        document.getElementById('personalForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const first = document.getElementById('firstName').value;
+            const last = document.getElementById('lastName').value;
+            const fullName = `${first} ${last}`.trim();
+            
+            localStorage.setItem('name', fullName);
+            localStorage.setItem('phone', document.getElementById('phone').value);
+            localStorage.setItem('dob', document.getElementById('dob').value);
+            localStorage.setItem('gender', document.getElementById('gender').value);
+            localStorage.setItem('bio', document.getElementById('bio').value);
+            localStorage.setItem('language', document.getElementById('language').value);
+            
+            initProfile();
+            initAuth();
+            showToast('✓ Profile updated successfully!', 'success');
+        });
+
+        function resetForm() {
+            initProfile();
+            showToast('ℹ Form reset to saved values', 'success');
+        }
+
         document.getElementById('passwordForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            const newPass = document.getElementById('newPassword').value;
+            const confirm = document.getElementById('confirmPassword').value;
             
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (newPassword !== confirmPassword) {
-                showToast('❌ Passwords do not match!', 'error');
+            if (newPass !== confirm) {
+                showToast('✕ Passwords do not match!', 'error');
                 return;
             }
-
-            if (newPassword.length < 6) {
-                showToast('❌ Password must be at least 6 characters!', 'error');
+            
+            if (newPass.length < 6) {
+                showToast('✕ Password must be at least 6 characters!', 'error');
                 return;
             }
-
-            showToast('✅ Password updated successfully!', 'success');
+            
+            showToast('✓ Password updated successfully!', 'success');
             document.getElementById('passwordForm').reset();
         });
 
-        // Address Form
-        document.getElementById('addressForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const address = {
-                label: document.getElementById('addressLabel').value,
-                name: document.getElementById('addressName').value,
-                street: document.getElementById('street').value,
-                landmark: document.getElementById('landmark').value,
-                city: document.getElementById('city').value,
-                state: document.getElementById('state').value,
-                pincode: document.getElementById('pincode').value,
-                country: document.getElementById('country').value
-            };
-
-            localStorage.setItem('savedAddress', JSON.stringify(address));
-            showToast('✅ Address saved successfully!', 'success');
-            loadProfileData();
-        });
-
-        function savePreferences() {
-            const emailNotif = document.getElementById('emailNotif').checked;
-            const smsNotif = document.getElementById('smsNotif').checked;
-            const marketing = document.getElementById('marketing').checked;
-
-            localStorage.setItem('emailNotif', emailNotif);
-            localStorage.setItem('smsNotif', smsNotif);
-            localStorage.setItem('marketing', marketing);
-
-            showToast('✅ Preferences saved successfully!', 'success');
-        }
-
-        function confirmDeleteAccount() {
-            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                if (confirm('This is your last chance. Really delete your account?')) {
-                    localStorage.clear();
-                    alert('Account deleted. We\'re sorry to see you go!');
-                    window.location.href = 'index.html';
+        function deleteAccount() {
+            if (confirm('⚠️ Are you sure you want to delete your account?\n\nThis action cannot be undone!')) {
+                if (confirm('⚠️ Last chance! Really delete your account?')) {
+                    showToast('Account deleted. Goodbye!', 'error');
+                    setTimeout(() => {
+                        localStorage.clear();
+                        window.location.href = 'index.html';
+                    }, 2000);
                 }
             }
         }
 
-        // Avatar Upload
+        function savePrefs() {
+            localStorage.setItem('emailNotif', document.getElementById('emailNotif').checked);
+            localStorage.setItem('smsNotif', document.getElementById('smsNotif').checked);
+            localStorage.setItem('marketing', document.getElementById('marketing').checked);
+            showToast('✓ Preferences saved successfully!', 'success');
+        }
+
+        // Avatar upload
         document.getElementById('avatarUpload').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    showToast('✅ Profile photo updated!', 'success');
-                };
-                reader.readAsDataURL(file);
+            if (e.target.files[0]) {
+                showToast('✓ Profile photo updated!', 'success');
             }
         });
 
-        // Dark Mode
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeLink = document.getElementById('darkModeLink');
-        const darkModeSwitch = document.getElementById('darkModeToggleSwitch');
+        // Dark mode
+        const darkBtn = document.getElementById('darkModeBtn');
+        const darkLink = document.getElementById('darkModeLink');
         
-        function applyTheme(theme) {
-            document.documentElement.classList.toggle("dark", theme === "dark");
-            darkModeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
-            darkModeLink.querySelector('.sidebar-nav-icon').textContent = theme === "dark" ? "☀️" : "🌙";
-            darkModeSwitch.checked = theme === "dark";
+        function toggleDark() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            darkBtn.textContent = isDark ? '☀️' : '🌙';
+            darkLink.querySelector('.sidebar-nav-icon').textContent = isDark ? '☀️' : '🌙';
         }
         
-        const stored = localStorage.getItem("theme");
-        applyTheme(stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+        if (localStorage.getItem('theme') === 'dark') {
+            toggleDark();
+        }
         
-        darkModeToggle.addEventListener("click", toggleTheme);
-        darkModeLink.addEventListener("click", (e) => {
+        darkBtn.addEventListener('click', toggleDark);
+        darkLink.addEventListener('click', (e) => {
             e.preventDefault();
-            toggleTheme();
+            toggleDark();
         });
-        darkModeSwitch.addEventListener("change", toggleTheme);
 
-        function toggleTheme() {
-            const newTheme = document.documentElement.classList.contains("dark") ? "light" : "dark";
-            applyTheme(newTheme);
-            localStorage.setItem("theme", newTheme);
+        // Toast
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            document.getElementById('toastMessage').textContent = msg;
+            icon.textContent = type === 'success' ? '✓' : '✕';
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3500);
         }
 
-        // Load saved preferences
-        function loadPreferences() {
-            document.getElementById('emailNotif').checked = localStorage.getItem('emailNotif') !== 'false';
-            document.getElementById('smsNotif').checked = localStorage.getItem('smsNotif') === 'true';
-            document.getElementById('marketing').checked = localStorage.getItem('marketing') !== 'false';
-        }
+        // Load preferences
+        document.getElementById('emailNotif').checked = localStorage.getItem('emailNotif') !== 'false';
+        document.getElementById('smsNotif').checked = localStorage.getItem('smsNotif') === 'true';
+        document.getElementById('marketing').checked = localStorage.getItem('marketing') !== 'false';
 
-        // Update last seen
-        const now = new Date();
-        const hours = now.getHours();
-        let greeting = hours < 12 ? 'morning' : hours < 18 ? 'afternoon' : 'evening';
-        document.getElementById('lastSeen').textContent = 'this ' + greeting;
-
-        // Set join date if not set
-        if (!localStorage.getItem('joinDate')) {
-            const joinDate = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-            localStorage.setItem('joinDate', joinDate);
-        }
-
-        window.addEventListener('load', function() {
+        // Init
+        window.addEventListener('load', () => {
             initAuth();
-            loadProfileData();
-            loadPreferences();
-            fetchUserStats();
+            initProfile();
+            if (!localStorage.getItem('joinDate')) {
+                localStorage.setItem('joinDate', Date.now());
+            }
         });
     </script>
 </body>
